@@ -65,9 +65,26 @@
     gap: 30px;
 }
 
+.el,
+.el_sm {
+    display: inline-block;
+    background-color: #fff;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.el_sm {
+    background-color: #b61111;
+    width: 10px;
+    height: 10px;
+}
+
 .benefits h2 {
-    text-align: center;
-    font-size: 36px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 32px;
     font-weight: 600;
 }
 

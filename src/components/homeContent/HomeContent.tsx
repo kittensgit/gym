@@ -35,7 +35,11 @@ const HomeContent: FC = () => {
                     </p>
                     <div className={styles.benefits}>
                         <h2>
+                            <span className={styles.el_sm}></span>
+                            <span className={styles.el}></span>
                             Преимущества <b>GYM</b>
+                            <span className={styles.el}></span>
+                            <span className={styles.el_sm}></span>
                         </h2>
                         <div className={styles.benefits_content}>
                             <div className={styles.benefits_item}>
