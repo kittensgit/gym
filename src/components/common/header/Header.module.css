@@ -1,0 +1,46 @@
+.header {
+    background-color: #181818;
+    font-size: 20px;
+    padding: 20px;
+    font-weight: 600;
+}
+
+.header span {
+    color: #b61111;
+}
+
+.header a {
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease-in;
+}
+
+.header a:hover {
+    color: #b61111;
+}
+
+.header_nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_logo {
+    display: flex;
+    align-items: center;
+}
+
+.header_logo img {
+    width: 70px;
+    height: 70px;
+}
+
+.header_logo strong {
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.header_list {
+    display: flex;
+    gap: 20px;
+}
