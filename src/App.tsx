@@ -20,6 +20,7 @@ const App: FC = () => {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/profile/:userId" element={<Profile />} />
+                    <Route path="*" element={<div>Not found page</div>} />
                 </Routes>
             </main>
         </div>
