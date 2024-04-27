@@ -55,7 +55,7 @@
     text-align: center;
     font-size: 18px;
     line-height: 130%;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 }
 
 .benefits {
@@ -63,6 +63,8 @@
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    padding-top: 20px;
+    padding-bottom: 50px;
 }
 
 .el,
@@ -118,4 +120,71 @@
 .benefits_item p {
     text-align: center;
     line-height: 125%;
+}
+
+.cards {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    z-index: 0;
+    transition: all 0.4s ease-in;
+}
+
+.card:hover::after {
+    height: 60%;
+}
+
+.card p {
+    font-family: 'Poller One', sans-serif;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 26px;
+    bottom: 10%;
+    left: 5%;
+    z-index: 1;
+}
+
+.card p img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease-in;
+}
+
+.card:hover p img {
+    transform: scale(1.02) translateX(5px);
+}
+
+.card span {
+    color: #b61111;
+}
+
+.card img {
+    object-fit: cover;
+    width: 500px;
+    height: 300px;
 }

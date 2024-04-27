@@ -1,8 +1,13 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
-import interfaceImg from 'assets/icons/interface.png';
-import communityImg from 'assets/icons/community.png';
-import protectionImg from 'assets/icons/protection.png';
+import interfaceIcon from 'assets/icons/interface.png';
+import communityIcon from 'assets/icons/community.png';
+import protectionIcon from 'assets/icons/protection.png';
+import arrowIcon from 'assets/icons/arrow.png';
+
+import women from 'assets/women.jpg';
+import men from 'assets/men.jpg';
 
 import styles from './HomeContent.module.css';
 
@@ -47,7 +52,7 @@ const HomeContent: FC = () => {
                         </h2>
                         <div className={styles.benefits_content}>
                             <div className={styles.benefits_item}>
-                                <img src={interfaceImg} alt="interface" />
+                                <img src={interfaceIcon} alt="interface" />
                                 <h3>Доступный интерфейс</h3>
                                 <p>
                                     Удобный и интуитивно понятный интерфейс
@@ -56,7 +61,7 @@ const HomeContent: FC = () => {
                                 </p>
                             </div>
                             <div className={styles.benefits_item}>
-                                <img src={communityImg} alt="community" />
+                                <img src={communityIcon} alt="community" />
                                 <h3>Комьюнити</h3>
                                 <p>
                                     Возможность общения с единомышленниками,
@@ -65,8 +70,8 @@ const HomeContent: FC = () => {
                                 </p>
                             </div>
                             <div className={styles.benefits_item}>
-                                <img src={protectionImg} alt="protection" />
-                                <h3>Безопасность Ваших данных</h3>
+                                <img src={protectionIcon} alt="protection" />
+                                <h3>Безопасность</h3>
                                 <p>
                                     Обеспечение высокого уровня защиты данных
                                     пользователей и их конфиденциальности
@@ -75,6 +80,22 @@ const HomeContent: FC = () => {
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div className={styles.cards}>
+                        <Link to={'/profile/1'} className={styles.card}>
+                            <img src={women} alt="women" />
+                            <p>
+                                Get <span>fit</span>
+                                <img src={arrowIcon} alt="arrow" />
+                            </p>
+                        </Link>
+                        <Link to={'/profile/1'} className={styles.card}>
+                            <img src={men} alt="men" />
+                            <p>
+                                Get <span>strong</span>
+                                <img src={arrowIcon} alt="arrow" />
+                            </p>
+                        </Link>
                     </div>
                 </div>
             </div>
