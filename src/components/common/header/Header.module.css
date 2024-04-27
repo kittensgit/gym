@@ -1,7 +1,6 @@
 .header {
     background-color: #181818;
     font-size: 20px;
-    padding: 20px;
     font-weight: 600;
 }
 
@@ -19,10 +18,15 @@
     color: #b61111;
 }
 
+.active {
+    color: #b61111;
+}
+
 .header_nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 20px;
 }
 
 .header_logo {
@@ -36,8 +40,8 @@
 }
 
 .header_logo strong {
+    font-family: 'Poller One', sans-serif;
     font-size: 40px;
-    font-weight: 900;
 }
 
 .header_list {

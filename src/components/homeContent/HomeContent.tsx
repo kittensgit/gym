@@ -8,13 +8,17 @@ import styles from './HomeContent.module.css';
 
 const HomeContent: FC = () => {
     return (
-        <div className={styles.home}>
-            <div className="container">
-                <div className={styles.preview}>
-                    <h1 className={styles.text}>
-                        Get fit, <span>strong&motivated</span> with us!
-                    </h1>
+        <>
+            <div className={styles.home}>
+                <div className="container">
+                    <div className={styles.preview}>
+                        <h1 className={styles.text}>
+                            Get fit, <span>strong&motivated</span> with us!
+                        </h1>
+                    </div>
                 </div>
+            </div>
+            <div className="container">
                 <div className={styles.about}>
                     <div className={styles.about_title}>
                         <div className={styles.line}></div>
@@ -74,7 +78,7 @@ const HomeContent: FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

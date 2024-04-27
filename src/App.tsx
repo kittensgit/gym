@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from 'components/common/header/Header';
+import Footer from 'components/common/footer/Footer';
 
 import Home from 'pages/Home';
 import Blog from 'pages/Blog';
@@ -23,6 +24,7 @@ const App: FC = () => {
                     <Route path="*" element={<div>Not found page</div>} />
                 </Routes>
             </main>
+            <Footer />
         </div>
     );
 };
