@@ -15,14 +15,14 @@ const App: FC = () => {
         <div className="app">
             <Header />
             <main className="main_wrapper">
-                <Routes>
+                {/* <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/profile/:userId" element={<Profile />} />
                     <Route path="*" element={<div>Not found page</div>} />
-                </Routes>
+                </Routes> */}
             </main>
             <Footer />
         </div>
