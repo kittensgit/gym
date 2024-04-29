@@ -19,7 +19,7 @@ const Footer: FC = () => {
                         <Link className={styles.footer_logo} to={'/'}>
                             <img src={logoIcon} alt="logo" />
                             <strong>
-                                G<span>Y</span>M
+                                <span>N</span>G<span>Y</span>M<span>X</span>
                             </strong>
                         </Link>
                         <div className={styles.socials}>

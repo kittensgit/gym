@@ -20,7 +20,7 @@ const Header: FC = () => {
                     <Link className={styles.header_logo} to={'/'}>
                         <img src={logo} alt="logo" />
                         <strong>
-                            G<span>Y</span>M
+                            <span>N</span>G<span>Y</span>M<span>X</span>
                         </strong>
                     </Link>
                     <ul className={styles.header_list}>
