@@ -9,8 +9,8 @@ const SignInContent: FC = () => {
             <div className={styles.signin_content}>
                 <h1>Welcome Back!</h1>
                 <form>
-                    <input placeholder="Введите свой email" />
-                    <input placeholder="Введите пароль" />
+                    <input type="email" placeholder="Введите свой email" />
+                    <input type="password" placeholder="Введите пароль" />
                     <button>Войти</button>
                 </form>
                 <p>
