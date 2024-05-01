@@ -13,7 +13,7 @@ import styles from './HomeContent.module.css';
 
 const HomeContent: FC = () => {
     return (
-        <>
+        <div className={styles.wrapper}>
             <div className={styles.home}>
                 <div className="container">
                     <div className={styles.preview}>
@@ -99,7 +99,7 @@ const HomeContent: FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

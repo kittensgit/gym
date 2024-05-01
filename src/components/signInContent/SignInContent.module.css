@@ -1,7 +1,8 @@
 .signin_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    padding: 0 15px;
 }
 .signin_content {
     display: flex;
@@ -9,21 +10,20 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    width: 500px;
-    height: 600px;
+    max-width: 500px;
     border: 2px solid #3e3d3d;
     background-color: #222121;
     border-radius: 20px;
     margin: 20px 0;
-    padding: 30px;
+    padding: 50px 30px;
 }
 
 .signin_content h1 {
     color: #b61111;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 42px;
     font-family: 'Poller One', sans-serif;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .signin_content form {
