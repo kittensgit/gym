@@ -76,7 +76,7 @@ const Footer: FC<FooterProps> = ({ isAuth, username, userId }) => {
                         ) : (
                             <li
                                 className={
-                                    pathname === '/signin' || '/signup'
+                                    pathname === ('/signin' || '/signup')
                                         ? styles.active
                                         : ''
                                 }

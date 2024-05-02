@@ -1,6 +1,11 @@
 import { FC, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+    GoogleAuthProvider,
+    getAuth,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+} from 'firebase/auth';
 
 import SignInContent from 'components/signInContent/SignInContent';
 
@@ -12,6 +17,7 @@ import { IUser } from 'types/user/user';
 import { setUser } from '../redux/ProfileSlice';
 
 const SignIn: FC = () => {
+    const auth = getAuth();
     const { isAuth, id } = useAuth();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -19,7 +25,6 @@ const SignIn: FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
 
     const onSignIn = (email: IUser['email'], password: string) => {
-        const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 setLoading(true);
@@ -43,6 +48,30 @@ const SignIn: FC = () => {
             });
     };
 
+    const onGoogleSignIn = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then(({ user }) => {
+                setLoading(true);
+                dispatch(
+                    setUser({
+                        email: user.email,
+                        token: user.refreshToken,
+                        id: user.uid,
+                        username: user.displayName,
+                    })
+                );
+            })
+            .catch((error: any) => {
+                if (error instanceof Error) {
+                    setErrorMessage(error.message);
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
+
     return (
         <div className="container">
             {loading ? (
@@ -51,6 +80,7 @@ const SignIn: FC = () => {
                 <Navigate replace to={`/profile/${id}`} />
             ) : (
                 <SignInContent
+                    onGoogleSignIn={onGoogleSignIn}
                     errorMessage={errorMessage}
                     onSignIn={onSignIn}
                 />

@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 
 import { IUser } from 'types/user/user';
 
+import googleIcon from 'assets/icons/google.png';
+
 import styles from './SignInContent.module.css';
 
 interface SignInContentProps {
     errorMessage: string;
+    onGoogleSignIn: () => void;
     onSignIn: (email: IUser['email'], password: string) => void;
 }
 
@@ -15,7 +18,11 @@ interface ISignInFormData {
     password: string;
 }
 
-const SignInContent: FC<SignInContentProps> = ({ errorMessage, onSignIn }) => {
+const SignInContent: FC<SignInContentProps> = ({
+    errorMessage,
+    onSignIn,
+    onGoogleSignIn,
+}) => {
     const [formData, setFormData] = useState<ISignInFormData>({
         email: '',
         password: '',
@@ -54,6 +61,10 @@ const SignInContent: FC<SignInContentProps> = ({ errorMessage, onSignIn }) => {
                     />
                     <button type="submit">Войти</button>
                 </form>
+                <button className={styles.google} onClick={onGoogleSignIn}>
+                    <img src={googleIcon} alt="google" />
+                    Войти с помощью Google
+                </button>
                 <p>
                     Нет аккаунта? <Link to="/signup">Создайте его здесь</Link>
                 </p>

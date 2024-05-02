@@ -60,7 +60,7 @@ const Header: FC<HeaderProps> = ({ isAuth, userId, username }) => {
                             <li>
                                 <Link
                                     className={
-                                        pathname === '/signin' || '/signup'
+                                        pathname === ('/signin' || '/signup')
                                             ? styles.active
                                             : ''
                                     }
