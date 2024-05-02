@@ -1,22 +1,73 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './SignUpContent.module.css';
 
-const SignUpContent: FC = () => {
+interface SignUpContentProps {
+    errorMessage: string;
+    onSignUp: (username: string, email: string, password: string) => void;
+}
+
+interface ISignUpFormData {
+    username: string;
+    email: string;
+    password: string;
+}
+
+const SignUpContent: FC<SignUpContentProps> = ({ onSignUp, errorMessage }) => {
+    const [formData, setFormData] = useState<ISignUpFormData>({
+        username: '',
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const { username, email, password } = formData;
+        onSignUp(username, email, password);
+    };
+
     return (
         <div className={styles.signup_wrapper}>
             <div className={styles.signup_content}>
                 <h1>Create account</h1>
-                <form>
-                    <input type="text" placeholder="Введите своё имя" />
-                    <input type="email" placeholder="Введите свой email" />
-                    <input type="password" placeholder="Введите пароль" />
-                    <button>Зарегистрироваться</button>
+                <form className={styles.form} onSubmit={handleSubmit}>
+                    <input
+                        value={formData.username}
+                        type="text"
+                        name="username"
+                        placeholder="Введите своё имя"
+                        onChange={handleChange}
+                    />
+                    <input
+                        value={formData.email}
+                        type="email"
+                        name="email"
+                        placeholder="Введите свой email"
+                        onChange={handleChange}
+                    />
+                    <input
+                        value={formData.password}
+                        type="password"
+                        name="password"
+                        placeholder="Введите пароль"
+                        onChange={handleChange}
+                    />
+                    <button type="submit">Зарегистрироваться</button>
                 </form>
                 <p>
                     Уже есть аккаунт? <Link to="/signin">Войдите здесь</Link>
                 </p>
+                {errorMessage && <p>{errorMessage}</p>}
             </div>
         </div>
     );

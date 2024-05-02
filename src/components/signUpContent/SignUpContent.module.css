@@ -26,14 +26,14 @@
     padding-bottom: 20px;
 }
 
-.signup_content form {
+.signup_content .form {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.signup_content form input {
+.signup_content .form input {
     width: 100%;
     background-color: #161515;
     border: none;
@@ -45,7 +45,7 @@
     transition: transform 0.3s ease-in;
 }
 
-.signup_content form button {
+.signup_content .form button {
     padding: 15px;
     margin: 0 15px;
     border-radius: 25px;
@@ -57,7 +57,7 @@
     transition: all 0.3s ease-in;
 }
 
-.signup_content form button:hover {
+.signup_content .form button:hover {
     color: #b61111;
     transform: scale(1.02);
 }
