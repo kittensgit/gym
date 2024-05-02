@@ -9,9 +9,15 @@ import arrowIcon from 'assets/icons/arrow.png';
 import women from 'assets/women.jpg';
 import men from 'assets/men.jpg';
 
+import { IUser } from 'types/user/user';
+
 import styles from './HomeContent.module.css';
 
-const HomeContent: FC = () => {
+interface HomeContentProps {
+    userId?: IUser['id'];
+}
+
+const HomeContent: FC<HomeContentProps> = ({ userId }) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.home}>
@@ -82,14 +88,20 @@ const HomeContent: FC = () => {
                         </div>
                     </div>
                     <div className={styles.cards}>
-                        <Link to={'/profile/1'} className={styles.card}>
+                        <Link
+                            to={userId ? `/profile/${userId}` : '/signin'}
+                            className={styles.card}
+                        >
                             <img src={women} alt="women" />
                             <p>
                                 Get <span>fit</span>
                                 <img src={arrowIcon} alt="arrow" />
                             </p>
                         </Link>
-                        <Link to={'/profile/1'} className={styles.card}>
+                        <Link
+                            to={userId ? `/profile/${userId}` : '/signin'}
+                            className={styles.card}
+                        >
                             <img src={men} alt="men" />
                             <p>
                                 Get <span>strong</span>
