@@ -1,11 +1,17 @@
 import { FC, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    updateProfile,
+} from 'firebase/auth';
 
 import SignUpContent from 'components/signUpContent/SignUpContent';
 
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useAuth } from 'hooks/useAuth';
+
+import { IUser } from 'types/user/user';
 
 import { setUser } from '../redux/ProfileSlice';
 
@@ -17,8 +23,8 @@ const SignUp: FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const onSignUp = async (
-        username: string,
-        email: string,
+        username: IUser['username'],
+        email: IUser['email'],
         password: string
     ) => {
         const auth = getAuth();
@@ -31,6 +37,10 @@ const SignUp: FC = () => {
                 email,
                 password
             );
+
+            await updateProfile(user, {
+                displayName: username,
+            });
 
             dispatch(
                 setUser({

@@ -10,10 +10,13 @@ import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 import Profile from 'pages/Profile';
 
+import { useAuth } from 'hooks/useAuth';
+
 const App: FC = () => {
+    const { isAuth, username, id } = useAuth();
     return (
         <div className="app">
-            <Header />
+            <Header isAuth={isAuth} userId={id} username={username} />
             <main className="main_wrapper">
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -24,7 +27,7 @@ const App: FC = () => {
                     <Route path="*" element={<div>Not found page</div>} />
                 </Routes>
             </main>
-            <Footer />
+            <Footer isAuth={isAuth} username={username} userId={id} />
         </div>
     );
 };

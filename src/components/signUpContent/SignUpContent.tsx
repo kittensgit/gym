@@ -1,16 +1,22 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { IUser } from 'types/user/user';
+
 import styles from './SignUpContent.module.css';
 
 interface SignUpContentProps {
     errorMessage: string;
-    onSignUp: (username: string, email: string, password: string) => void;
+    onSignUp: (
+        username: IUser['username'],
+        email: IUser['email'],
+        password: string
+    ) => void;
 }
 
 interface ISignUpFormData {
-    username: string;
-    email: string;
+    username: IUser['username'];
+    email: IUser['email'];
     password: string;
 }
 

@@ -7,9 +7,17 @@ import fbIcon from 'assets/icons/fb.png';
 import twitterIcon from 'assets/icons/twitter.png';
 import linkedinIcon from 'assets/icons/linkedin.png';
 
+import { IUser } from 'types/user/user';
+
 import styles from './Footer.module.css';
 
-const Footer: FC = () => {
+interface FooterProps {
+    isAuth: boolean;
+    userId?: IUser['id'];
+    username?: IUser['username'];
+}
+
+const Footer: FC<FooterProps> = ({ isAuth, username, userId }) => {
     const { pathname } = useLocation();
     return (
         <footer className={styles.footer}>
@@ -52,15 +60,32 @@ const Footer: FC = () => {
                                 <span>Б</span>лог
                             </Link>
                         </li>
-                        <li
-                            className={
-                                pathname === '/signin' ? styles.active : ''
-                            }
-                        >
-                            <Link to={'/signin'}>
-                                <span>В</span>ойти
-                            </Link>
-                        </li>
+                        {isAuth ? (
+                            <li
+                                className={
+                                    pathname === `/profile/${userId}`
+                                        ? styles.active
+                                        : ''
+                                }
+                            >
+                                <Link to={`/profile/${userId}`}>
+                                    <span>{username?.charAt(0)}</span>
+                                    {username?.slice(1)}
+                                </Link>
+                            </li>
+                        ) : (
+                            <li
+                                className={
+                                    pathname === '/signin' || '/signup'
+                                        ? styles.active
+                                        : ''
+                                }
+                            >
+                                <Link to={'/signin'}>
+                                    <span>В</span>ойти
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

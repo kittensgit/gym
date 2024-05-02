@@ -3,9 +3,17 @@ import { Link, useLocation } from 'react-router-dom';
 
 import logo from 'assets/icons/logo.png';
 
+import { IUser } from 'types/user/user';
+
 import styles from './Header.module.css';
 
-const Header: FC = () => {
+interface HeaderProps {
+    isAuth: boolean;
+    userId: IUser['id'];
+    username: IUser['username'];
+}
+
+const Header: FC<HeaderProps> = ({ isAuth, userId, username }) => {
     const { pathname } = useLocation();
     return (
         <header className={styles.header}>
@@ -34,16 +42,34 @@ const Header: FC = () => {
                                 <span>Б</span>лог
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                to={'/signin'}
-                                className={
-                                    pathname === '/signin' ? styles.active : ''
-                                }
-                            >
-                                <span>В</span>ойти
-                            </Link>
-                        </li>
+                        {isAuth ? (
+                            <li>
+                                <Link
+                                    className={
+                                        pathname === `/profile/${userId}`
+                                            ? styles.active
+                                            : ''
+                                    }
+                                    to={`/profile/${userId}`}
+                                >
+                                    <span>{username?.charAt(0)}</span>
+                                    {username?.slice(1)}
+                                </Link>
+                            </li>
+                        ) : (
+                            <li>
+                                <Link
+                                    className={
+                                        pathname === '/signin' || '/signup'
+                                            ? styles.active
+                                            : ''
+                                    }
+                                    to={'/signin'}
+                                >
+                                    <span>В</span>ойти
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             </div>
