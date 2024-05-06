@@ -1,15 +1,21 @@
 import { FC } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import ProfileContent from 'components/profileContent/ProfileContent';
+
 import { useAuth } from 'hooks/useAuth';
 
 const Profile: FC = () => {
-    const { isAuth } = useAuth();
+    const { isAuth, username, id } = useAuth();
 
     return (
-        <div className="container">
-            {isAuth ? <div>Profile</div> : <Navigate replace to={'/signin'} />}
-        </div>
+        <>
+            {isAuth ? (
+                <ProfileContent userId={id} username={username} />
+            ) : (
+                <Navigate replace to={'/signin'} />
+            )}
+        </>
     );
 };
 
