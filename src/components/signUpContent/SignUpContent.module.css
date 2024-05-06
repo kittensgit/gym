@@ -24,16 +24,17 @@
     font-size: 42px;
     font-family: 'Poller One', sans-serif;
     padding-bottom: 20px;
+    text-align: center;
 }
 
-.signup_content .form {
+.signup_content form {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.signup_content .form input {
+.signup_content form input {
     width: 100%;
     background-color: #161515;
     border: none;
@@ -45,7 +46,7 @@
     transition: transform 0.3s ease-in;
 }
 
-.signup_content .form button {
+.signup_content form button {
     padding: 15px;
     margin: 0 15px;
     border-radius: 25px;
@@ -57,7 +58,7 @@
     transition: all 0.3s ease-in;
 }
 
-.signup_content .form button:hover {
+.signup_content form button:hover {
     color: #b61111;
     transform: scale(1.02);
 }
@@ -68,9 +69,49 @@
 
 .signup_content p {
     font-size: 18px;
+    text-align: center;
 }
 
 .signup_content a {
     color: #b61111;
     font-weight: 600;
+}
+
+@media (max-width: 500px) {
+    .signup_content {
+        padding: 40px 20px;
+    }
+    .signup_content h1 {
+        padding-bottom: 10px;
+        font-size: 38px;
+    }
+    .signup_content form {
+        gap: 10px;
+    }
+    .signup_content form input {
+        font-size: 18px;
+    }
+    .signup_content form button {
+        font-size: 18px;
+        margin: 0 20px;
+    }
+    .signup_content p {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 430px) {
+    .signup_wrapper {
+        padding: 0 10px;
+    }
+    .signup_content {
+        padding: 35px 15px;
+    }
+    .signup_content h1 {
+        font-size: 34px;
+        padding-bottom: 5px;
+    }
+    .signup_content p {
+        font-size: 16px;
+    }
 }

@@ -46,7 +46,7 @@ const SignUpContent: FC<SignUpContentProps> = ({ onSignUp, errorMessage }) => {
         <div className={styles.signup_wrapper}>
             <div className={styles.signup_content}>
                 <h1>Create account</h1>
-                <form className={styles.form} onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <input
                         value={formData.username}
                         type="text"

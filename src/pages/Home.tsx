@@ -8,7 +8,7 @@ const Home: FC = () => {
     const { id } = useAuth();
     return (
         <>
-            <HomeContent />
+            <HomeContent userId={id} />
         </>
     );
 };

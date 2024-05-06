@@ -19,6 +19,7 @@
 }
 
 .signin_content h1 {
+    text-align: center;
     color: #b61111;
     font-weight: 700;
     font-size: 42px;
@@ -68,6 +69,7 @@
 
 .signin_content p {
     font-size: 18px;
+    text-align: center;
 }
 
 .signin_content a {
@@ -100,4 +102,49 @@
 .google img {
     width: 35px;
     height: 35px;
+}
+
+@media (max-width: 500px) {
+    .signin_content {
+        padding: 40px 20px;
+    }
+    .signin_content h1 {
+        padding-bottom: 10px;
+        font-size: 38px;
+    }
+    .signin_content form {
+        gap: 10px;
+    }
+    .signin_content form input {
+        font-size: 18px;
+    }
+    .signin_content form button {
+        font-size: 18px;
+        margin: 0 20px;
+    }
+    .google {
+        font-size: 18px;
+    }
+    .signin_content p {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 430px) {
+    .signin_wrapper {
+        padding: 0 10px;
+    }
+    .signin_content {
+        padding: 35px 15px;
+    }
+    .signin_content h1 {
+        font-size: 34px;
+        padding-bottom: 5px;
+    }
+    .google {
+        padding: 8px 15px;
+    }
+    .signin_content p {
+        font-size: 16px;
+    }
 }
