@@ -1,0 +1,16 @@
+.workout_exercise {
+    padding: 10px 30px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.workout_exercise h4 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.exercise_content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

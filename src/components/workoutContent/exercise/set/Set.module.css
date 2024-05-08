@@ -1,0 +1,9 @@
+.workout_set {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+}
+
+.workout_set:nth-child(even) {
+    color: #b61111;
+}

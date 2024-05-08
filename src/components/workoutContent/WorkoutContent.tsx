@@ -4,6 +4,9 @@ import plusIcon from 'assets/icons/plus.png';
 
 import { IExercise, ISet, IWorkout } from 'types/user/user';
 
+import Exercise from './exercise/Exercise';
+import Set from './exercise/set/Set';
+
 import styles from './WorkoutContent.module.css';
 
 const WorkoutContent: FC = () => {
@@ -45,7 +48,6 @@ const WorkoutContent: FC = () => {
         setWorkoutName('');
         setDateWorkout('');
         setExercises([]);
-        setSets([]);
     };
 
     const handleSaveExercises = () => {
@@ -56,6 +58,7 @@ const WorkoutContent: FC = () => {
         };
         setExercises([newExercise, ...exercises]);
         setExerciseName('');
+        setSets([]);
     };
 
     const handleSaveSet = () => {
@@ -161,44 +164,22 @@ const WorkoutContent: FC = () => {
                                     </button>
                                 </div>
                             )}
-
                             {sets.map((itemSets) => (
-                                <div className={styles.workout_set}>
-                                    <p>
-                                        {itemSets.countApproaches} ×{' '}
-                                        {itemSets.countTimes}
-                                    </p>
-                                    <p>{itemSets.weight}</p>
-                                </div>
+                                <Set set={itemSets} />
                             ))}
-
                             <button onClick={handleSaveExercises}>
                                 Добавить
                             </button>
                         </div>
                     )}
                     {exercises.map((itemExercises) => (
-                        <div className={styles.workout_exercise}>
-                            <h4>{itemExercises.exerciseName}</h4>
-                            <div className={styles.exercise_content}>
-                                {itemExercises.sets.map((itemSets) => (
-                                    <div className={styles.workout_set}>
-                                        <p>
-                                            {itemSets.countApproaches} ×{' '}
-                                            {itemSets.countTimes}
-                                        </p>
-                                        <p>{itemSets.weight} кг</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <Exercise exercise={itemExercises} />
                     ))}
                     <button onClick={handleSaveWorkout} className={styles.btn}>
                         Добавить тренировку
                     </button>
                 </div>
             )}
-
             <div className={styles.workout}>
                 {workout.map((itemWorkout) => (
                     <div className={styles.workout_item}>
@@ -207,20 +188,7 @@ const WorkoutContent: FC = () => {
                             {itemWorkout.workoutName}
                         </h3>
                         {itemWorkout.exercises.map((itemExercises) => (
-                            <div className={styles.workout_exercise}>
-                                <h4>{itemExercises.exerciseName}</h4>
-                                <div className={styles.exercise_content}>
-                                    {itemExercises.sets.map((itemSets) => (
-                                        <div className={styles.workout_set}>
-                                            <p>
-                                                {itemSets.countApproaches} ×{' '}
-                                                {itemSets.countTimes}
-                                            </p>
-                                            <p>{itemSets.weight} кг</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            <Exercise exercise={itemExercises} />
                         ))}
                     </div>
                 ))}
