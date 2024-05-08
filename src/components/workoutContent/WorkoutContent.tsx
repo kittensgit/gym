@@ -68,7 +68,7 @@ const WorkoutContent: FC = () => {
             countTimes,
             weight,
         };
-        setSets([newSet, ...sets]);
+        setSets([...sets, newSet]);
         setCountApproaches(1);
         setCountTimes(1);
         setWeight(1);
@@ -79,96 +79,121 @@ const WorkoutContent: FC = () => {
             {!isAddWorkout ? (
                 <button
                     onClick={handleChangeIsAddWorkout}
-                    className={styles.btn}
+                    className={styles.btn_plus}
                 >
                     <img src={plusIcon} alt="plus" />
                     Добавить тренировку
                 </button>
             ) : (
-                <div className={styles.workout_item}>
-                    <input
-                        value={dateWorkout}
-                        onChange={(e) => setDateWorkout(e.target.value)}
-                        type="text"
-                        placeholder="Введите дату тренировки"
-                    />
-                    <input
-                        value={workoutName}
-                        onChange={(e) => setWorkoutName(e.target.value)}
-                        type="text"
-                        placeholder="Введите название тренировки"
-                    />
+                <div className={styles.workout_form}>
+                    <div className={styles.workout_inputs}>
+                        <input
+                            value={dateWorkout}
+                            onChange={(e) => setDateWorkout(e.target.value)}
+                            type="text"
+                            placeholder="Введите дату тренировки(дд/мм/гг)"
+                        />
+                        <input
+                            value={workoutName}
+                            onChange={(e) => setWorkoutName(e.target.value)}
+                            type="text"
+                            placeholder="Введите название тренировки"
+                        />
+                    </div>
                     {!isAddExercise ? (
                         <button
                             onClick={handleChangeIsAddExercise}
-                            className={styles.btn}
+                            className={styles.btn_plus}
                         >
                             <img src={plusIcon} alt="plus" />
                             Добавить упражнение
                         </button>
                     ) : (
-                        <div className={styles.workout_exercise}>
-                            <input
-                                value={exerciseName}
-                                onChange={(e) =>
-                                    setExerciseName(e.target.value)
-                                }
-                                type="text"
-                                placeholder="Введите название упражнения"
-                            />
-                            {!isAddSet ? (
-                                <button
-                                    onClick={handleChangeIsAddSet}
-                                    className={styles.btn}
-                                >
-                                    <img src={plusIcon} alt="plus" />
-                                    Добавить сет
-                                </button>
-                            ) : (
-                                <div className={styles.exercise_content}>
-                                    <div className={styles.workout_set}>
-                                        <input
-                                            value={countApproaches}
-                                            onChange={(e) =>
-                                                setCountApproaches(
-                                                    parseInt(e.target.value, 10)
-                                                )
-                                            }
-                                            type="number"
-                                            placeholder="количество подходов"
-                                        />
-                                        ×
-                                        <input
-                                            value={countTimes}
-                                            onChange={(e) =>
-                                                setCountTimes(
-                                                    parseInt(e.target.value, 10)
-                                                )
-                                            }
-                                            type="number"
-                                            placeholder="количество повторений"
-                                        />
-                                        <input
-                                            value={weight}
-                                            onChange={(e) =>
-                                                setWeight(
-                                                    parseInt(e.target.value, 10)
-                                                )
-                                            }
-                                            type="number"
-                                            placeholder="вес"
-                                        />
+                        <div className={styles.exercise_form}>
+                            <div className={styles.exercise_form_content}>
+                                <input
+                                    value={exerciseName}
+                                    onChange={(e) =>
+                                        setExerciseName(e.target.value)
+                                    }
+                                    type="text"
+                                    placeholder="Введите название упражнения"
+                                />
+                                {!isAddSet ? (
+                                    <div className={styles.set_wrapper}>
+                                        {sets.map((itemSets) => (
+                                            <Set set={itemSets} />
+                                        ))}
+                                        <button
+                                            onClick={handleChangeIsAddSet}
+                                            className={styles.btn_plus}
+                                        >
+                                            <img src={plusIcon} alt="plus" />
+                                            Добавить сет
+                                        </button>
                                     </div>
-                                    <button onClick={handleSaveSet}>
-                                        Применить
-                                    </button>
-                                </div>
-                            )}
-                            {sets.map((itemSets) => (
-                                <Set set={itemSets} />
-                            ))}
-                            <button onClick={handleSaveExercises}>
-                                Добавить
+                                ) : (
+                                    <div className={styles.set_form}>
+                                        {sets.map((itemSets) => (
+                                            <Set set={itemSets} />
+                                        ))}
+                                        <div className={styles.set_inputs}>
+                                            <input
+                                                value={countApproaches}
+                                                onChange={(e) =>
+                                                    setCountApproaches(
+                                                        parseInt(
+                                                            e.target.value,
+                                                            10
+                                                        )
+                                                    )
+                                                }
+                                                type="number"
+                                                placeholder="Подходов"
+                                            />
+                                            <span>×</span>
+                                            <input
+                                                value={countTimes}
+                                                onChange={(e) =>
+                                                    setCountTimes(
+                                                        parseInt(
+                                                            e.target.value,
+                                                            10
+                                                        )
+                                                    )
+                                                }
+                                                type="number"
+                                                placeholder="Повторений"
+                                            />
+                                            <input
+                                                value={weight}
+                                                onChange={(e) =>
+                                                    setWeight(
+                                                        parseInt(
+                                                            e.target.value,
+                                                            10
+                                                        )
+                                                    )
+                                                }
+                                                type="number"
+                                                placeholder="Вес"
+                                            />
+                                        </div>
+                                        <button
+                                            className={styles.btn}
+                                            onClick={handleSaveSet}
+                                        >
+                                            Применить
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                            <button
+                                className={styles.btn}
+                                onClick={handleSaveExercises}
+                            >
+                                Добавить упражнение
                             </button>
                         </div>
                     )}
