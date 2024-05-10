@@ -20,4 +20,5 @@ export interface IWorkout {
     workoutName: string;
     dateWorkout: string;
     exercises: IExercise[];
+    id: string;
 }

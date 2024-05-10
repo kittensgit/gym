@@ -15,7 +15,6 @@ interface ProfileContentProps {
 
 const ProfileContent: FC<ProfileContentProps> = ({ username, userId }) => {
     const { pathname } = useLocation();
-    console.log(pathname);
     return (
         <div className={styles.wrapper}>
             <img className={styles.bg} src={bg} alt="bg" />

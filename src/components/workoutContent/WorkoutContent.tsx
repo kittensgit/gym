@@ -1,8 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
 
 import plusIcon from 'assets/icons/plus.png';
 
 import { IExercise, ISet, IWorkout } from 'types/user/user';
+import { useAuth } from 'hooks/useAuth';
 
 import Exercise from './exercise/Exercise';
 import Set from './exercise/set/Set';
@@ -10,6 +12,12 @@ import Set from './exercise/set/Set';
 import styles from './WorkoutContent.module.css';
 
 const WorkoutContent: FC = () => {
+    const { id } = useAuth();
+    const db = getFirestore();
+    const workoutRef = collection(db, 'users', `${id}`, 'workouts');
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const [workout, setWorkout] = useState<IWorkout[]>([]);
     const [exercises, setExercises] = useState<IExercise[]>([]);
     const [sets, setSets] = useState<ISet[]>([]);
@@ -27,6 +35,30 @@ const WorkoutContent: FC = () => {
     const [countTimes, setCountTimes] = useState<number>(1);
     const [weight, setWeight] = useState<number>(1);
 
+    useEffect(() => {
+        const getWorkoutList = async () => {
+            try {
+                setIsLoading(true);
+                const data = await getDocs(workoutRef);
+                const filteredData: IWorkout[] = data.docs.map((doc) => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id,
+                        workoutName: data.workoutName,
+                        dateWorkout: data.dateWorkout,
+                        exercises: data.exercises,
+                    };
+                });
+                setWorkout(filteredData);
+            } catch (error) {
+                console.error('ERROR');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        getWorkoutList();
+    }, [isAddWorkout]);
+
     const handleChangeIsAddWorkout = () => {
         setIsAddWorkout(!isAddWorkout);
     };
@@ -35,19 +67,6 @@ const WorkoutContent: FC = () => {
     };
     const handleChangeIsAddSet = () => {
         setIsAddSet(!isAddSet);
-    };
-
-    const handleSaveWorkout = () => {
-        handleChangeIsAddWorkout();
-        const newWorkout: IWorkout = {
-            workoutName,
-            dateWorkout,
-            exercises: exercises,
-        };
-        setWorkout([newWorkout, ...workout]);
-        setWorkoutName('');
-        setDateWorkout('');
-        setExercises([]);
     };
 
     const handleSaveExercises = () => {
@@ -72,6 +91,22 @@ const WorkoutContent: FC = () => {
         setCountApproaches(1);
         setCountTimes(1);
         setWeight(1);
+    };
+
+    const handleSaveWorkout = async () => {
+        try {
+            handleChangeIsAddWorkout();
+            await addDoc(workoutRef, {
+                workoutName,
+                dateWorkout,
+                exercises,
+            });
+            setWorkoutName('');
+            setDateWorkout('');
+            setExercises([]);
+        } catch (error) {
+            console.error('ERROR');
+        }
     };
 
     return (
@@ -205,19 +240,23 @@ const WorkoutContent: FC = () => {
                     </button>
                 </div>
             )}
-            <div className={styles.workout}>
-                {workout.map((itemWorkout) => (
-                    <div className={styles.workout_item}>
-                        <h3>
-                            <span>{itemWorkout.dateWorkout}</span> —{' '}
-                            {itemWorkout.workoutName}
-                        </h3>
-                        {itemWorkout.exercises.map((itemExercises) => (
-                            <Exercise exercise={itemExercises} />
-                        ))}
-                    </div>
-                ))}
-            </div>
+            {isLoading ? (
+                <div>Loading...</div>
+            ) : (
+                <div className={styles.workout}>
+                    {workout.map((itemWorkout) => (
+                        <div className={styles.workout_item}>
+                            <h3>
+                                <span>{itemWorkout.dateWorkout}</span> —{' '}
+                                {itemWorkout.workoutName}
+                            </h3>
+                            {itemWorkout.exercises.map((itemExercises) => (
+                                <Exercise exercise={itemExercises} />
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
