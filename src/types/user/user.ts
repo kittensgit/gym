@@ -18,7 +18,11 @@ export interface IExercise {
 
 export interface IWorkout {
     workoutName: string;
-    dateWorkout: string;
+    dateWorkout: {
+        day: number;
+        month: number;
+        year: number;
+    };
     exercises: IExercise[];
     id: string;
 }

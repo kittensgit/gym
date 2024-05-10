@@ -131,6 +131,11 @@
     justify-content: space-between;
 }
 
+.inputs_date {
+    display: flex;
+    gap: 20px;
+}
+
 .exercise_form {
     padding: 0 20px;
     width: 100%;

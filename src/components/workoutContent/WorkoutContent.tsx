@@ -26,8 +26,12 @@ const WorkoutContent: FC = () => {
     const [isAddExercise, setIsAddExercise] = useState<boolean>(false);
     const [isAddSet, setIsAddSet] = useState<boolean>(false);
 
-    const [workoutName, setWorkoutName] = useState<string>('');
-    const [dateWorkout, setDateWorkout] = useState<string>('');
+    const [workoutName, setWorkoutName] = useState<IWorkout['workoutName']>('');
+    const [dateWorkout, setDateWorkout] = useState<IWorkout['dateWorkout']>({
+        day: 1,
+        month: 1,
+        year: 2024,
+    });
 
     const [exerciseName, setExerciseName] = useState<string>('');
 
@@ -49,7 +53,20 @@ const WorkoutContent: FC = () => {
                         exercises: data.exercises,
                     };
                 });
-                setWorkout(filteredData);
+                const sortedDataByDate = filteredData.sort((w1, w2) => {
+                    const dateW1 = new Date(
+                        w1.dateWorkout.year,
+                        w1.dateWorkout.month - 1,
+                        w1.dateWorkout.day
+                    );
+                    const dateW2 = new Date(
+                        w2.dateWorkout.year,
+                        w2.dateWorkout.month - 1,
+                        w2.dateWorkout.day
+                    );
+                    return dateW1.getTime() - dateW2.getTime();
+                });
+                setWorkout(sortedDataByDate);
             } catch (error) {
                 console.error('ERROR');
             } finally {
@@ -102,11 +119,23 @@ const WorkoutContent: FC = () => {
                 exercises,
             });
             setWorkoutName('');
-            setDateWorkout('');
+            setDateWorkout({
+                day: 1,
+                month: 1,
+                year: 2024,
+            });
             setExercises([]);
         } catch (error) {
             console.error('ERROR');
         }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setDateWorkout((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
     };
 
     return (
@@ -122,12 +151,29 @@ const WorkoutContent: FC = () => {
             ) : (
                 <div className={styles.workout_form}>
                     <div className={styles.workout_inputs}>
-                        <input
-                            value={dateWorkout}
-                            onChange={(e) => setDateWorkout(e.target.value)}
-                            type="text"
-                            placeholder="Введите дату тренировки(дд/мм/гг)"
-                        />
+                        <div className={styles.inputs_date}>
+                            <input
+                                value={dateWorkout.day}
+                                onChange={handleChange}
+                                type="number"
+                                name="day"
+                                placeholder="День"
+                            />
+                            <input
+                                value={dateWorkout.month}
+                                onChange={handleChange}
+                                type="number"
+                                name="month"
+                                placeholder="Месяц"
+                            />
+                            <input
+                                value={dateWorkout.year}
+                                onChange={handleChange}
+                                type="number"
+                                name="year"
+                                placeholder="Год"
+                            />
+                        </div>
                         <input
                             value={workoutName}
                             onChange={(e) => setWorkoutName(e.target.value)}
@@ -247,8 +293,14 @@ const WorkoutContent: FC = () => {
                     {workout.map((itemWorkout) => (
                         <div className={styles.workout_item}>
                             <h3>
-                                <span>{itemWorkout.dateWorkout}</span> —{' '}
-                                {itemWorkout.workoutName}
+                                <span>{itemWorkout.dateWorkout.day}/</span>
+                                <span>{itemWorkout.dateWorkout.month}/</span>
+                                <span>
+                                    {String(itemWorkout.dateWorkout.year).slice(
+                                        2
+                                    )}
+                                </span>
+                                — {itemWorkout.workoutName}
                             </h3>
                             {itemWorkout.exercises.map((itemExercises) => (
                                 <Exercise exercise={itemExercises} />
