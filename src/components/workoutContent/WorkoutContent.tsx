@@ -95,10 +95,13 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
                 <p className={styles.error}>
                     Произошла ошибка при добавлении тренировки: {saveError}
                 </p>
-            ) : (
+            ) : workout.length ? (
                 <div className={styles.workout}>
                     {workout.map((itemWorkout) => (
-                        <div className={styles.workout_item}>
+                        <div
+                            key={itemWorkout.id}
+                            className={styles.workout_item}
+                        >
                             <h3>
                                 <span>{itemWorkout.dateWorkout.day}/</span>
                                 <span>{itemWorkout.dateWorkout.month}/</span>
@@ -109,12 +112,21 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
                                 </span>
                                 — {itemWorkout.workoutName}
                             </h3>
-                            {itemWorkout.exercises.map((itemExercises) => (
-                                <Exercise exercise={itemExercises} />
-                            ))}
+                            {itemWorkout.exercises.map(
+                                (itemExercises, indexEsercises) => (
+                                    <Exercise
+                                        key={indexEsercises}
+                                        exercise={itemExercises}
+                                    />
+                                )
+                            )}
                         </div>
                     ))}
                 </div>
+            ) : (
+                <p className={styles.message}>
+                    Тренировки еще не были добавлены
+                </p>
             )}
         </div>
     );

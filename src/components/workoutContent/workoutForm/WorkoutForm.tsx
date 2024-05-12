@@ -119,8 +119,8 @@ const WorkoutForm: FC<WorkoutFormProps> = ({
                         />
                         {!isAddSet ? (
                             <div className={styles.set_wrapper}>
-                                {sets.map((itemSets) => (
-                                    <Sets set={itemSets} />
+                                {sets.map((itemSets, indexSets) => (
+                                    <Sets key={indexSets} set={itemSets} />
                                 ))}
                                 <button
                                     onClick={handleChangeIsAddSet}
@@ -132,8 +132,8 @@ const WorkoutForm: FC<WorkoutFormProps> = ({
                             </div>
                         ) : (
                             <div className={styles.set_form}>
-                                {sets.map((itemSets) => (
-                                    <Sets set={itemSets} />
+                                {sets.map((itemSets, indexSets) => (
+                                    <Sets key={indexSets} set={itemSets} />
                                 ))}
                                 <div className={styles.set_inputs}>
                                     <input
@@ -185,8 +185,8 @@ const WorkoutForm: FC<WorkoutFormProps> = ({
                     </button>
                 </div>
             )}
-            {exercises.map((itemExercises) => (
-                <Exercises exercise={itemExercises} />
+            {exercises.map((itemExercises, indexExercises) => (
+                <Exercises key={indexExercises} exercise={itemExercises} />
             ))}
             <button
                 onClick={() => handleSaveWorkout(exercises)}

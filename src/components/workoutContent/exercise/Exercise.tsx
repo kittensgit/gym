@@ -15,8 +15,8 @@ const Exercises: FC<ExercisesProps> = ({ exercise }) => {
         <div className={styles.workout_exercise}>
             <h4>{exercise.exerciseName}</h4>
             <div className={styles.exercise_content}>
-                {exercise.sets.map((itemSets) => (
-                    <Set set={itemSets} />
+                {exercise.sets.map((itemSets, indexSets) => (
+                    <Set key={indexSets} set={itemSets} />
                 ))}
             </div>
         </div>
