@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import { IExercise, ISet, IWorkout } from 'types/user/user';
 
 import plusIcon from 'assets/icons/plus.png';
+import doneIcon from 'assets/icons/check.png';
 
 import Exercises from '../exercise/Exercise';
 import Sets from '../exercise/set/Set';
@@ -190,9 +191,9 @@ const WorkoutForm: FC<WorkoutFormProps> = ({
             ))}
             <button
                 onClick={() => handleSaveWorkout(exercises)}
-                className={styles.btn}
+                className={styles.btn + ' ' + styles.done}
             >
-                Добавить тренировку
+                <img src={doneIcon} alt="done" />
             </button>
         </div>
     );

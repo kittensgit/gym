@@ -5,6 +5,11 @@ export interface IUser {
     token: string;
 }
 
+export interface IUpdateUser {
+    aim: string;
+    aboutText: string;
+}
+
 export interface ISet {
     countApproaches: number;
     countTimes: number;

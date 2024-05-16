@@ -19,6 +19,7 @@ const SignUp: FC = () => {
     const { isAuth, id } = useAuth();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
     const [errorMes, setErrorMes] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
 

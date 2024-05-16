@@ -11,21 +11,47 @@
 
 .profile {
     padding: 0 20px;
-    transform: translateY(-5%);
+    transform: translateY(-8%);
 }
 
 .info {
     display: flex;
+    justify-content: space-between;
+
     gap: 30px;
-    align-items: end;
 }
 
-.info img {
+.info_content img {
     object-fit: cover;
     border-radius: 50%;
     width: 250px;
     height: 250px;
     border: 10px solid #161515;
+}
+
+.info_content {
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+.edit {
+    align-self: flex-start;
+    transform: translateY(100%);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s ease-in;
+}
+
+.edit img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.edit:hover {
+    transform: translateY(100%) scale(1.07);
 }
 
 .about {

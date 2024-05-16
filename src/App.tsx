@@ -9,9 +9,9 @@ import Blog from 'pages/Blog';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 import Profile from 'pages/Profile';
+import Workout from 'pages/Workout';
 
 import { useAuth } from 'hooks/useAuth';
-import Workout from 'pages/Workout';
 
 const App: FC = () => {
     const { isAuth, username, id } = useAuth();

@@ -1,17 +1,100 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import {
+    doc,
+    getDoc,
+    getFirestore,
+    setDoc,
+    updateDoc,
+} from 'firebase/firestore';
 
 import ProfileContent from 'components/profileContent/ProfileContent';
 
 import { useAuth } from 'hooks/useAuth';
+import { IUpdateUser } from 'types/user/user';
 
 const Profile: FC = () => {
     const { isAuth, username, id } = useAuth();
+    const db = getFirestore();
+
+    const [user, setUser] = useState<IUpdateUser>({
+        aim: '',
+        aboutText: '',
+    });
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const updateUser = (name: string, value: string) => {
+        setUser((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const toggleEdit = () => {
+        setIsEdit(!isEdit);
+    };
+
+    const addUserInfoToFirebase = async (
+        aim: IUpdateUser['aim'],
+        aboutText: IUpdateUser['aboutText']
+    ) => {
+        try {
+            setIsLoading(true);
+            if (id) {
+                const userRef = doc(db, 'users', `${id}`);
+                if (user) {
+                    await updateDoc(userRef, {
+                        aim,
+                        aboutText,
+                    });
+                } else {
+                    await setDoc(userRef, {
+                        aim,
+                        aboutText,
+                    });
+                }
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    useEffect(() => {
+        const getUserInfoFromFirebase = async () => {
+            if (id && !isEdit) {
+                try {
+                    setIsLoading(true);
+                    const userRef = doc(db, 'users', `${id}`);
+                    const docSnapshot = await getDoc(userRef);
+                    if (docSnapshot.exists()) {
+                        const userData = docSnapshot.data();
+                        const { aim, aboutText } = userData;
+                        setUser({ aim, aboutText });
+                    }
+                } finally {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        getUserInfoFromFirebase();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isEdit]);
 
     return (
         <>
             {isAuth ? (
-                <ProfileContent userId={id} username={username} />
+                <ProfileContent
+                    userId={id}
+                    username={username}
+                    isLoading={isLoading}
+                    userProfileData={user}
+                    isEdit={isEdit}
+                    updateUser={updateUser}
+                    toggleEdit={toggleEdit}
+                    addUserInfoToFirebase={addUserInfoToFirebase}
+                />
             ) : (
                 <Navigate replace to={'/signin'} />
             )}
