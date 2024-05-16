@@ -51,16 +51,26 @@ const ProfileContent: FC<ProfileContentProps> = ({
 
     return (
         <div className={styles.wrapper}>
-            <img className={styles.bg} src={bg} alt="bg" />
             <div className="container">
                 <div className={styles.profile}>
                     <div className={styles.info}>
+                        <div className={styles.bg}>
+                            <img src={bg} alt="bg" />
+                        </div>
                         <div className={styles.info_content}>
                             <img src={ava} alt="avatar" />
                             {isEdit ? (
                                 <div className={styles.about}>
-                                    <h1>{username}</h1>
+                                    <h1>
+                                        {username.split(' ').map((item) => (
+                                            <>
+                                                <span>{item.charAt(0)}</span>
+                                                {item.slice(1)}{' '}
+                                            </>
+                                        ))}
+                                    </h1>
                                     <input
+                                        className={styles.input}
                                         value={userProfileData.aim}
                                         onChange={handleChange}
                                         name="aim"
@@ -70,7 +80,14 @@ const ProfileContent: FC<ProfileContentProps> = ({
                                 </div>
                             ) : (
                                 <div className={styles.about}>
-                                    <h1>{username}</h1>
+                                    <h1>
+                                        {username.split(' ').map((item) => (
+                                            <>
+                                                <span>{item.charAt(0)}</span>
+                                                {item.slice(1)}{' '}
+                                            </>
+                                        ))}
+                                    </h1>
                                     {isLoading ? (
                                         <div>Loading...</div>
                                     ) : (
@@ -96,6 +113,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                         <h2>О себе</h2>
                         {isEdit ? (
                             <textarea
+                                className={styles.textarea}
                                 value={userProfileData.aboutText}
                                 name="aboutText"
                                 onChange={handleChange}
@@ -110,12 +128,12 @@ const ProfileContent: FC<ProfileContentProps> = ({
                                     : 'Нет информации о себе'}
                             </p>
                         )}
+                        {isEdit && (
+                            <button className={styles.btn} onClick={onSaveEdit}>
+                                Применить изменения
+                            </button>
+                        )}
                     </div>
-                    {isEdit && (
-                        <button onClick={onSaveEdit}>
-                            Применить изменения
-                        </button>
-                    )}
                     <div className={styles.links}>
                         <Link
                             className={

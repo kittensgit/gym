@@ -52,8 +52,12 @@ const Header: FC<HeaderProps> = ({ isAuth, userId, username }) => {
                                     }
                                     to={`/profile/${userId}`}
                                 >
-                                    <span>{username?.charAt(0)}</span>
-                                    {username?.slice(1)}
+                                    {username.split(' ').map((item) => (
+                                        <>
+                                            <span>{item.charAt(0)}</span>
+                                            {item.slice(1)}{' '}
+                                        </>
+                                    ))}
                                 </Link>
                             </li>
                         ) : (

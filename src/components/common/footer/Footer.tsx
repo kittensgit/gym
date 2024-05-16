@@ -13,8 +13,8 @@ import styles from './Footer.module.css';
 
 interface FooterProps {
     isAuth: boolean;
-    userId?: IUser['id'];
-    username?: IUser['username'];
+    userId: IUser['id'];
+    username: IUser['username'];
 }
 
 const Footer: FC<FooterProps> = ({ isAuth, username, userId }) => {
@@ -69,8 +69,12 @@ const Footer: FC<FooterProps> = ({ isAuth, username, userId }) => {
                                 }
                             >
                                 <Link to={`/profile/${userId}`}>
-                                    <span>{username?.charAt(0)}</span>
-                                    {username?.slice(1)}
+                                    {username.split(' ').map((item) => (
+                                        <>
+                                            <span>{item.charAt(0)}</span>
+                                            {item.slice(1)}{' '}
+                                        </>
+                                    ))}
                                 </Link>
                             </li>
                         ) : (
