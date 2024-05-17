@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 
 import plusIcon from 'assets/icons/plus.png';
+import deleteIcon from 'assets/icons/trash.png';
 
 import { IExercise, IWorkout } from 'types/user/user';
 
@@ -14,6 +15,7 @@ interface WorkoutContentProps {
     isAddWorkout: boolean;
     isLoading: boolean;
     handleChangeIsAddWorkout: () => void;
+    deleteWorkoutFromFirebase: (id: IWorkout['id']) => void;
     addWorkoutToFirebase: (
         workoutName: IWorkout['workoutName'],
         dateWorkout: IWorkout['dateWorkout'],
@@ -26,6 +28,7 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
     isAddWorkout,
     isLoading,
     handleChangeIsAddWorkout,
+    deleteWorkoutFromFirebase,
     addWorkoutToFirebase,
 }) => {
     const [workoutName, setWorkoutName] = useState<IWorkout['workoutName']>('');
@@ -70,6 +73,10 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
         }
     };
 
+    const handleRemoveWorkout = async (id: IWorkout['id']) => {
+        deleteWorkoutFromFirebase(id);
+    };
+
     return (
         <div className={styles.wrapper}>
             {!isAddWorkout ? (
@@ -102,16 +109,28 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
                             key={itemWorkout.id}
                             className={styles.workout_item}
                         >
-                            <h3>
-                                <span>{itemWorkout.dateWorkout.day}/</span>
-                                <span>{itemWorkout.dateWorkout.month}/</span>
-                                <span>
-                                    {String(itemWorkout.dateWorkout.year).slice(
-                                        2
-                                    )}
-                                </span>
-                                — {itemWorkout.workoutName}
-                            </h3>
+                            <div className={styles.workout_top}>
+                                <h3>
+                                    <span>{itemWorkout.dateWorkout.day}/</span>
+                                    <span>
+                                        {itemWorkout.dateWorkout.month}/
+                                    </span>
+                                    <span>
+                                        {String(
+                                            itemWorkout.dateWorkout.year
+                                        ).slice(2)}
+                                    </span>
+                                    — {itemWorkout.workoutName}
+                                </h3>
+                                <button
+                                    onClick={() =>
+                                        handleRemoveWorkout(itemWorkout.id)
+                                    }
+                                    className={styles.delete}
+                                >
+                                    <img src={deleteIcon} alt="delete" />
+                                </button>
+                            </div>
                             {itemWorkout.exercises.map(
                                 (itemExercises, indexEsercises) => (
                                     <Exercise

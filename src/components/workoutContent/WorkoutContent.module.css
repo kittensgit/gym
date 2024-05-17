@@ -1,5 +1,5 @@
 .wrapper {
-    padding-top: 20px;
+    padding: 20px 0;
 }
 
 .btn_plus {
@@ -58,16 +58,38 @@
     gap: 20px;
     border: 2px solid #463d3d;
     border-radius: 25px;
-    padding: 30px;
+    padding: 20px 30px;
 }
 
-.workout_item h3 {
+.workout_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.workout_top h3 {
     font-size: 30px;
     font-weight: 600;
 }
 
-.workout_item span {
+.workout_top span {
     color: #b61111;
+}
+
+.delete {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in;
+}
+
+.delete img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+.delete:hover {
+    transform: scale(1.1);
 }
 
 .workout_exercise {
