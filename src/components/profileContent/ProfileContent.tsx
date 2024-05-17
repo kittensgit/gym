@@ -62,12 +62,16 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             {isEdit ? (
                                 <div className={styles.about}>
                                     <h1>
-                                        {username.split(' ').map((item) => (
-                                            <>
-                                                <span>{item.charAt(0)}</span>
-                                                {item.slice(1)}{' '}
-                                            </>
-                                        ))}
+                                        {username
+                                            .split(' ')
+                                            .map((item, index) => (
+                                                <div key={index}>
+                                                    <span>
+                                                        {item.charAt(0)}
+                                                    </span>
+                                                    {item.slice(1)}
+                                                </div>
+                                            ))}
                                     </h1>
                                     <input
                                         className={styles.input}
@@ -81,12 +85,16 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             ) : (
                                 <div className={styles.about}>
                                     <h1>
-                                        {username.split(' ').map((item) => (
-                                            <>
-                                                <span>{item.charAt(0)}</span>
-                                                {item.slice(1)}{' '}
-                                            </>
-                                        ))}
+                                        {username
+                                            .split(' ')
+                                            .map((item, index) => (
+                                                <div key={index}>
+                                                    <span>
+                                                        {item.charAt(0)}
+                                                    </span>
+                                                    {item.slice(1)}
+                                                </div>
+                                            ))}
                                     </h1>
                                     {isLoading ? (
                                         <div>Loading...</div>
