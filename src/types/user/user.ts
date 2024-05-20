@@ -8,6 +8,10 @@ export interface IUser {
 export interface IUpdateUser {
     aim: string;
     aboutText: string;
+    avatar: {
+        file: File | null;
+        url: string;
+    };
 }
 
 export interface ISet {
