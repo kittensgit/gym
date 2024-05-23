@@ -63,11 +63,9 @@
     border-radius: 25px;
 }
 
-.list li a {
+.link_words {
     display: flex;
-}
-.list li a div:first-child {
-    padding-right: 5px;
+    gap: 5px;
 }
 
 .list li:hover {

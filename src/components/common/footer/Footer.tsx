@@ -69,12 +69,18 @@ const Footer: FC<FooterProps> = ({ isAuth, username, userId }) => {
                                 }
                             >
                                 <Link to={`/profile/${userId}`}>
-                                    {username.split(' ').map((item, index) => (
-                                        <div key={index}>
-                                            <span>{item.charAt(0)}</span>
-                                            {item.slice(1)}{' '}
-                                        </div>
-                                    ))}
+                                    <div className={styles.link_words}>
+                                        {username
+                                            .split(' ')
+                                            .map((item, index) => (
+                                                <div key={index}>
+                                                    <span>
+                                                        {item.charAt(0)}
+                                                    </span>
+                                                    {item.slice(1)}{' '}
+                                                </div>
+                                            ))}
+                                    </div>
                                 </Link>
                             </li>
                         ) : (

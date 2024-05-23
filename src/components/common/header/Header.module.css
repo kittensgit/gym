@@ -13,12 +13,13 @@
     transition: color 0.3s ease-in;
 }
 
-.header a div:first-child {
-    padding-right: 5px;
-}
-
 .header a:hover {
     color: #b61111;
+}
+
+.link_words {
+    display: flex;
+    gap: 5px;
 }
 
 .active {

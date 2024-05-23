@@ -64,10 +64,11 @@ const Profile: FC = () => {
     ) => {
         try {
             const userRef = doc(db, 'users', `${id}`);
-
             setIsLoading(true);
             if (id) {
-                if (user) {
+                const docSnapshot = await getDoc(userRef);
+
+                if (docSnapshot.exists()) {
                     await updateDoc(userRef, {
                         aim,
                         aboutText,

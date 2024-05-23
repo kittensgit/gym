@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
 import bg from 'assets/back.jpg';
@@ -61,7 +61,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                         </div>
                         <div className={styles.info_content}>
                             <img
-                                src={avatarUrl ? avatarUrl : ava}
+                                src={!avatarUrl ? ava : avatarUrl}
                                 alt="avatar"
                             />
                             {isEdit ? (
