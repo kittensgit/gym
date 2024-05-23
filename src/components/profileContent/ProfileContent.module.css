@@ -116,29 +116,6 @@
     color: #a19c9c;
 }
 
-.links {
-    padding-top: 30px;
-    display: flex;
-    gap: 15px;
-}
-
-.links a {
-    background-color: #6a6969;
-    padding: 10px 15px;
-    border-radius: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    transition: all 0.3s ease-in;
-}
-
-.links a:hover {
-    background-color: #2e2e2e;
-}
-
-.active {
-    background-color: #272727 !important;
-}
-
 .btn,
 .input,
 .textarea {

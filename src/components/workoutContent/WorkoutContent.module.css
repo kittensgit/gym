@@ -124,6 +124,20 @@
     color: #b61111;
     font-weight: 700;
     font-size: 26px;
-    padding: 20px 10px 0 10px;
+    padding: 25px 10px 0 10px;
     text-align: center;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.message img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
 }

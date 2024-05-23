@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 
 import plusIcon from 'assets/icons/plus.png';
 import deleteIcon from 'assets/icons/trash.png';
+import emptyFile from 'assets/icons/empty.png';
 
 import { IExercise, IWorkout } from 'types/user/user';
 
@@ -145,6 +146,7 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
             ) : (
                 <p className={styles.message}>
                     Тренировки еще не были добавлены
+                    <img src={emptyFile} alt="empty" />
                 </p>
             )}
         </div>

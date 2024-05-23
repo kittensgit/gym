@@ -9,7 +9,6 @@ import Blog from 'pages/Blog';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 import Profile from 'pages/Profile';
-import Workout from 'pages/Workout';
 
 import { useAuth } from 'hooks/useAuth';
 
@@ -24,9 +23,7 @@ const App: FC = () => {
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signin" element={<SignIn />} />
-                    <Route path="/profile/:userId" element={<Profile />}>
-                        <Route path="" element={<Workout />} />
-                    </Route>
+                    <Route path="/profile/:userId" element={<Profile />} />
                     <Route path="*" element={<div>Not found page</div>} />
                 </Routes>
             </main>

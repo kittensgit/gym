@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
+import Workout from 'pages/Workout';
+
 import bg from 'assets/back.jpg';
 import ava from 'assets/avam.jpg';
 import editIcon from 'assets/icons/edit.png';
@@ -35,8 +37,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
     toggleEdit,
     addUserInfoToFirebase,
 }) => {
-    const { pathname } = useLocation();
-
     const handleChange = (
         e:
             | React.ChangeEvent<HTMLInputElement>
@@ -147,20 +147,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             </button>
                         )}
                     </div>
-                    <div className={styles.links}>
-                        <Link
-                            className={
-                                pathname === `/profile/${userId}`
-                                    ? styles.active
-                                    : ''
-                            }
-                            to={''}
-                        >
-                            Тренировки
-                        </Link>
-                        <a href="!#">Фото</a>
-                    </div>
-                    <Outlet />
+                    <Workout />
                 </div>
             </div>
         </div>
