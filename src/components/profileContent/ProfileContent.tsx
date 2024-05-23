@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
 import bg from 'assets/back.jpg';
@@ -15,8 +15,6 @@ interface ProfileContentProps {
     isLoading: boolean;
     userProfileData: IUpdateUser;
     isEdit: boolean;
-    uploading: boolean;
-    handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     updateUser: (name: string, value: string) => void;
     toggleEdit: () => void;
     addUserInfoToFirebase: (
@@ -31,15 +29,11 @@ const ProfileContent: FC<ProfileContentProps> = ({
     isLoading,
     userProfileData,
     isEdit,
-    uploading,
-    handleFileChange,
     updateUser,
     toggleEdit,
     addUserInfoToFirebase,
 }) => {
     const { pathname } = useLocation();
-
-    console.log(userProfileData.avatar?.url.slice(0, 100));
 
     const handleChange = (
         e:
@@ -55,91 +49,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
         addUserInfoToFirebase(userProfileData.aim, userProfileData.aboutText);
     };
 
-    // const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    // const [preview, setPreview] = useState<string | null>(null);
-    // const [uploading, setUploading] = useState<boolean>(false);
-    // const [error, setError] = useState<string | null>(null);
-
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-    // const handleAdd = async () => {
-    //     if (!selectedFile) return;
-
-    //     const storage = getStorage();
-    //     const db = getFirestore();
-
-    //     setUploading(true);
-    //     setError(null);
-
-    //     try {
-    //         const storageRef = ref(storage, `avatars/${selectedFile.name}`);
-    //         const uploadTask = uploadBytesResumable(storageRef, selectedFile);
-
-    //         uploadTask.on(
-    //             'state_changed',
-    //             (snapshot) => {
-    //                 // Можно добавить логику для отображения прогресса загрузки
-    //             },
-    //             (error) => {
-    //                 console.error('Ошибка загрузки:', error);
-    //                 setError('Ошибка загрузки файла');
-    //                 setUploading(false);
-    //             },
-    //             async () => {
-    //                 try {
-    //                     const downloadURL = await getDownloadURL(
-    //                         uploadTask.snapshot.ref
-    //                     );
-    //                     console.log('Файл доступен по URL:', downloadURL);
-
-    //                     const userDocRef = doc(db, 'users', `${userId}`);
-    //                     await updateDoc(userDocRef, {
-    //                         avaImg: downloadURL,
-    //                     });
-
-    //                     console.log(
-    //                         'Ссылка на изображение успешно сохранена в Firestore'
-    //                     );
-    //                 } catch (firestoreError) {
-    //                     console.error(
-    //                         'Ошибка при обновлении Firestore:',
-    //                         firestoreError
-    //                     );
-    //                     setError('Ошибка при обновлении Firestore');
-    //                 } finally {
-    //                     setUploading(false);
-    //                     setSelectedFile(null);
-    //                     setPreview(null);
-    //                 }
-    //             }
-    //         );
-    //     } catch (uploadError) {
-    //         console.error('Ошибка при загрузке файла:', uploadError);
-    //         setError('Ошибка при загрузке файла');
-    //         setUploading(false);
-    //     }
-    // };
-
-    // console.log('ERROR', error);
-
-    const handleContainerClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
-    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = event.target.files?.[0];
-    //     if (file) {
-    //         setSelectedFile(file);
-    //         const reader = new FileReader();
-    //         reader.onloadend = () => {
-    //             setPreview(reader.result as string);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     }
-    // };
-
     return (
         <div className={styles.wrapper}>
             <div className="container">
@@ -149,28 +58,11 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             <img src={bg} alt="bg" />
                         </div>
                         <div className={styles.info_content}>
-                            <div onClick={handleContainerClick}>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={handleFileChange}
-                                    ref={fileInputRef}
-                                    style={{ display: 'none' }}
-                                />
-                                {uploading ? (
-                                    <div>Upload...</div>
-                                ) : (
-                                    <img
-                                        src={
-                                            userProfileData.avatar?.url
-                                                ? userProfileData.avatar.url
-                                                : ava
-                                        }
-                                        alt="avatar"
-                                        style={{ cursor: 'pointer' }}
-                                    />
-                                )}
-                            </div>
+                            <img
+                                src={ava}
+                                alt="avatar"
+                                style={{ cursor: 'pointer' }}
+                            />
                             {isEdit ? (
                                 <div className={styles.about}>
                                     <h1>
