@@ -59,6 +59,7 @@ const SignIn: FC = () => {
                         token: user.refreshToken,
                         id: user.uid,
                         username: user.displayName,
+                        avatarUrl: user.photoURL,
                     })
                 );
             })

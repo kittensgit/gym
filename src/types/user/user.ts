@@ -3,6 +3,7 @@ export interface IUser {
     username: string;
     id: string;
     token: string;
+    avatarUrl: string;
 }
 
 export interface IUpdateUser {

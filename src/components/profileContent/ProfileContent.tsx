@@ -12,8 +12,9 @@ import styles from './ProfileContent.module.css';
 interface ProfileContentProps {
     username: IUser['username'];
     userId: IUser['id'];
-    isLoading: boolean;
     userProfileData: IUpdateUser;
+    avatarUrl: string;
+    isLoading: boolean;
     isEdit: boolean;
     updateUser: (name: string, value: string) => void;
     toggleEdit: () => void;
@@ -29,6 +30,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
     isLoading,
     userProfileData,
     isEdit,
+    avatarUrl,
     updateUser,
     toggleEdit,
     addUserInfoToFirebase,
@@ -59,9 +61,8 @@ const ProfileContent: FC<ProfileContentProps> = ({
                         </div>
                         <div className={styles.info_content}>
                             <img
-                                src={ava}
+                                src={avatarUrl ? avatarUrl : ava}
                                 alt="avatar"
-                                style={{ cursor: 'pointer' }}
                             />
                             {isEdit ? (
                                 <div className={styles.about}>

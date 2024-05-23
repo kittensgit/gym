@@ -14,7 +14,7 @@ import { useAuth } from 'hooks/useAuth';
 import { IUpdateUser } from 'types/user/user';
 
 const Profile: FC = () => {
-    const { isAuth, username, id } = useAuth();
+    const { isAuth, username, id, avatarUrl } = useAuth();
     const db = getFirestore();
 
     const [user, setUser] = useState<IUpdateUser>({
@@ -90,8 +90,9 @@ const Profile: FC = () => {
                 <ProfileContent
                     userId={id}
                     username={username}
-                    isLoading={isLoading}
                     userProfileData={user}
+                    avatarUrl={avatarUrl}
+                    isLoading={isLoading}
                     isEdit={isEdit}
                     updateUser={updateUser}
                     toggleEdit={toggleEdit}

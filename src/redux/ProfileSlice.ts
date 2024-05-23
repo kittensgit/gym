@@ -11,6 +11,7 @@ const initialState: IInitialState = {
         id: '',
         token: '',
         username: '',
+        avatarUrl: '',
     },
 };
 
@@ -23,12 +24,14 @@ const profileSlice = createSlice({
             state.user.id = action.payload.id;
             state.user.token = action.payload.token;
             state.user.username = action.payload.username;
+            state.user.avatarUrl = action.payload.avatarUrl;
         },
         removeUser: (state) => {
             state.user.email = '';
             state.user.id = '';
             state.user.token = '';
             state.user.username = '';
+            state.user.avatarUrl = '';
         },
     },
 });
