@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import React, { FC } from 'react';
 
 import Workout from 'pages/Workout';
 
 import bg from 'assets/back.jpg';
 import ava from 'assets/avam.jpg';
 import editIcon from 'assets/icons/edit.png';
+import thunderIcon from 'assets/icons/thunder.png';
 
 import { IUpdateUser, IUser } from 'types/user/user';
 
@@ -13,7 +13,6 @@ import styles from './ProfileContent.module.css';
 
 interface ProfileContentProps {
     username: IUser['username'];
-    userId: IUser['id'];
     userProfileData: IUpdateUser;
     avatarUrl: string;
     isLoading: boolean;
@@ -28,7 +27,6 @@ interface ProfileContentProps {
 
 const ProfileContent: FC<ProfileContentProps> = ({
     username,
-    userId,
     isLoading,
     userProfileData,
     isEdit,
@@ -56,9 +54,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
             <div className="container">
                 <div className={styles.profile}>
                     <div className={styles.info}>
-                        <div className={styles.bg}>
-                            <img src={bg} alt="bg" />
-                        </div>
                         <div className={styles.info_content}>
                             <img
                                 src={!avatarUrl ? ava : avatarUrl}

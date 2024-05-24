@@ -63,12 +63,10 @@ const Profile: FC = () => {
         aboutText: IUpdateUser['aboutText']
     ) => {
         try {
-            const userRef = doc(db, 'users', `${id}`);
             setIsLoading(true);
             if (id) {
-                const docSnapshot = await getDoc(userRef);
-
-                if (docSnapshot.exists()) {
+                const userRef = doc(db, 'users', `${id}`);
+                if (user.aim) {
                     await updateDoc(userRef, {
                         aim,
                         aboutText,
@@ -89,7 +87,6 @@ const Profile: FC = () => {
         <>
             {isAuth ? (
                 <ProfileContent
-                    userId={id}
                     username={username}
                     userProfileData={user}
                     avatarUrl={avatarUrl}
