@@ -1,0 +1,94 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.title h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.line {
+    background-color: #fff;
+    width: 150px;
+    height: 2px;
+    border-radius: 30px;
+}
+
+.form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px 40px;
+    gap: 50px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputs input,
+.inputs textarea {
+    color: #fff;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 20px;
+    outline: none;
+    background-color: transparent;
+    padding: 15px 20px;
+    transition: all 0.3s ease-in;
+}
+
+.inputs input {
+    border: none;
+    border-bottom: 2px solid #605656;
+}
+
+.inputs textarea {
+    border-radius: 20px;
+    height: 100%;
+    resize: none;
+    border: 2px solid #605656;
+}
+
+.inputs input:hover {
+    border-bottom: 2px solid #848383;
+}
+
+.inputs textarea:hover {
+    border: 2px solid #848383;
+}
+
+.select_img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background-color: #545454;
+    border-radius: 25px;
+    height: 300px;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in;
+}
+
+.select_img:hover {
+    background-color: #464646;
+}
+
+.select_img p {
+    font-weight: 700;
+    color: #c2c2c2;
+}
