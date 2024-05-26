@@ -1,7 +1,13 @@
 import { FC } from 'react';
 
+import BlogContent from 'components/blogContent/BlogContent';
+
 const Blog: FC = () => {
-    return <div>Blog</div>;
+    return (
+        <div className="container">
+            <BlogContent />
+        </div>
+    );
 };
 
 export default Blog;

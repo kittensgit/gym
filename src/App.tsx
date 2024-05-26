@@ -6,6 +6,7 @@ import Footer from 'components/common/footer/Footer';
 
 import Home from 'pages/Home';
 import Blog from 'pages/Blog';
+import CreateArticle from 'pages/CreateArticle';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 import Profile from 'pages/Profile';
@@ -21,6 +22,7 @@ const App: FC = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/blog" element={<Blog />} />
+                    <Route path="/create" element={<CreateArticle />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/profile/:userId" element={<Profile />} />
