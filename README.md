@@ -9,3 +9,5 @@
 `react-simplemde-editor` - позволяет создавать текст, используя синтаксис markdown
 
 `react-markdown` - отображает текст оформленный в формате markdown
+
+`date-fns` - для форматирования дат

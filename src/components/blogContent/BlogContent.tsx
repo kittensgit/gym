@@ -27,10 +27,12 @@ const BlogContent: FC = () => {
                     спортивным трекером NGYMX. Делайте каждый шаг на пути к
                     своим фитнес-целям вместе с нами!
                 </p>
-                <button className={styles.btn}>
-                    <Link to={'/create'}>Создайте свою статью</Link>
-                    <img src={arrowIcon} alt="arrow" />
-                </button>
+                <Link to={'/create'}>
+                    <button className={styles.btn}>
+                        Создайте свою статью
+                        <img src={arrowIcon} alt="arrow" />
+                    </button>
+                </Link>
             </div>
             <div className={styles.articles}>
                 <div className={styles.article}>
