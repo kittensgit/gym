@@ -164,6 +164,15 @@ body {
     flex-grow: 1;
 }
 
+.error {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    color: #b61111;
+    font-size: 30px;
+}
+
 .editor {
     width: 100%;
     border: 2px solid #605656;
