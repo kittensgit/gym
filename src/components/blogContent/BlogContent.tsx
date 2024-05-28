@@ -1,16 +1,21 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import typeImg from 'assets/type.jpg';
-import planImg from 'assets/plan.jpg';
-import krisImg from 'assets/kris.jpg';
+import ArticleCard from 'components/articleCard/ArticleCard';
+
+import { IArticle } from 'types/articles/articles';
 
 import decorIcon from 'assets/icons/decor.png';
 import arrowIcon from 'assets/icons/arrow_red.png';
 
 import styles from './BlogContent.module.css';
 
-const BlogContent: FC = () => {
+interface BlogContentProps {
+    isLoading: boolean;
+    articles: IArticle[];
+}
+
+const BlogContent: FC<BlogContentProps> = ({ articles, isLoading }) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.preview}>
@@ -34,68 +39,15 @@ const BlogContent: FC = () => {
                     </button>
                 </Link>
             </div>
-            <div className={styles.articles}>
-                <div className={styles.article}>
-                    <img
-                        className={styles.article_img}
-                        src={typeImg}
-                        alt="article img"
-                    />
-                    <h3>
-                        5 способов повысить эффективность тренировок с NGYMX
-                    </h3>
-                    <p className={styles.article_text}>
-                        Эти советы помогут вам быстрее достичь желаемых
-                        результатов и сделать процесс тренировок более
-                        увлекательным.
-                    </p>
-                    <div className={styles.author}>
-                        <div className={styles.info}>
-                            <img src={krisImg} alt="avatar" />
-                            <h4>Крис Котов</h4>
-                        </div>
-                        <p className={styles.date}>Май 25, 2024</p>
-                    </div>
+            {isLoading ? (
+                <div>Loading...</div>
+            ) : (
+                <div className={styles.articles}>
+                    {articles.map((article) => (
+                        <ArticleCard key={article.id} article={article} />
+                    ))}
                 </div>
-                <div className={styles.article}>
-                    <img
-                        className={styles.article_img}
-                        src={planImg}
-                        alt="article img"
-                    />
-                    <h3>Планирование тренировок</h3>
-                    <p className={styles.article_text}>
-                        Используйте функцию планирования тренировок в NGYMX,
-                        чтобы составить расписание и придерживаться его.
-                    </p>
-                    <div className={styles.author}>
-                        <div className={styles.info}>
-                            <img src={krisImg} alt="avatar" />
-                            <h4>Крис Котов</h4>
-                        </div>
-                        <p className={styles.date}>Май 29, 2024</p>
-                    </div>
-                </div>
-                <div className={styles.article}>
-                    <img
-                        className={styles.article_img}
-                        src={planImg}
-                        alt="article img"
-                    />
-                    <h3>Планирование тренировок</h3>
-                    <p className={styles.article_text}>
-                        Используйте функцию планирования тренировок в NGYMX,
-                        чтобы составить расписание и придерживаться его.
-                    </p>
-                    <div className={styles.author}>
-                        <div className={styles.info}>
-                            <img src={krisImg} alt="avatar" />
-                            <h4>Крис Котов</h4>
-                        </div>
-                        <p className={styles.date}>Май 29, 2024</p>
-                    </div>
-                </div>
-            </div>
+            )}
         </div>
     );
 };

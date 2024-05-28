@@ -11,6 +11,7 @@ const Article: FC = () => {
     const db = getFirestore();
 
     const [article, setArticle] = useState<IArticle>({
+        id: '',
         name: '',
         description: '',
         content: '',
@@ -30,7 +31,10 @@ const Article: FC = () => {
                 const articleSnap = await getDoc(articleRef);
                 if (articleSnap.exists()) {
                     const articleData = articleSnap.data() as IArticle;
-                    setArticle(articleData);
+                    setArticle({
+                        ...articleData,
+                        id: articleSnap.id,
+                    });
                 }
             } catch {
                 setError('Такого документа не существует!');
@@ -39,7 +43,7 @@ const Article: FC = () => {
             }
         };
         getArticle();
-    }, []);
+    }, [articleId]);
 
     return (
         <div className="container">

@@ -54,6 +54,7 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
     const handleAddArticle = () => {
         if (article && md) {
             const newArticle: IArticle = {
+                id: '',
                 name: article.name,
                 description: article.description,
                 content: md,
