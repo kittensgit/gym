@@ -33,7 +33,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
             <div className={styles.author}>
                 <div className={styles.info}>
                     {/* <img src={krisImg} alt="avatar" /> */}
-                    <h4>Крис Котов</h4>
+                    <h4>{article.user.username}</h4>
                 </div>
                 <p className={styles.date}>{article.createdAt.formatedDate}</p>
             </div>

@@ -9,4 +9,7 @@ export interface IArticle {
         date: Date | Timestamp;
         formatedDate: string;
     };
+    user: {
+        username: string;
+    };
 }

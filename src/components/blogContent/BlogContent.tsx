@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { Timestamp } from 'firebase/firestore';
 
 import ArticleCard from 'components/articleCard/ArticleCard';
 
@@ -16,6 +17,11 @@ interface BlogContentProps {
 }
 
 const BlogContent: FC<BlogContentProps> = ({ articles, isLoading }) => {
+    const sortedArticles = articles.sort((a1, a2) => {
+        const dateA1 = (a1.createdAt.date as Timestamp).toDate().getTime();
+        const dateA2 = (a2.createdAt.date as Timestamp).toDate().getTime();
+        return dateA2 - dateA1;
+    });
     return (
         <div className={styles.wrapper}>
             <div className={styles.preview}>
@@ -43,7 +49,7 @@ const BlogContent: FC<BlogContentProps> = ({ articles, isLoading }) => {
                 <div>Loading...</div>
             ) : (
                 <div className={styles.articles}>
-                    {articles.map((article) => (
+                    {sortedArticles.map((article) => (
                         <ArticleCard key={article.id} article={article} />
                     ))}
                 </div>

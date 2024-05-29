@@ -18,12 +18,7 @@ const CreateArticle: FC = () => {
     const addArticleToFirebase = async (article: IArticle) => {
         try {
             setIsLoading(true);
-            const docRef = await addDoc(articlesRef, {
-                ...article,
-                user: {
-                    username,
-                },
-            });
+            const docRef = await addDoc(articlesRef, article);
             navigate(`/article/${docRef.id}`);
         } finally {
             setIsLoading(false);
@@ -37,6 +32,7 @@ const CreateArticle: FC = () => {
                     <div>Loading...</div>
                 ) : (
                     <CreateArticleContent
+                        username={username}
                         addArticleToFirebase={addArticleToFirebase}
                     />
                 )

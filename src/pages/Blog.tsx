@@ -28,6 +28,9 @@ const Blog: FC = () => {
                                 date: data.createdAt.date,
                                 formatedDate: data.createdAt.formatedDate,
                             },
+                            user: {
+                                username: data.user.username,
+                            },
                         };
                     }
                 );

@@ -19,6 +19,9 @@ const Article: FC = () => {
             date: new Date(),
             formatedDate: '',
         },
+        user: {
+            username: '',
+        },
     });
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');

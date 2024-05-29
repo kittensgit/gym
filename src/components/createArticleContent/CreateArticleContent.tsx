@@ -9,10 +9,12 @@ import { formatDate } from 'helpers/formatDate';
 import styles from './CreateArticleContent.module.css';
 
 interface CreateArticleContentProps {
+    username: string;
     addArticleToFirebase: (article: IArticle) => void;
 }
 
 const CreateArticleContent: FC<CreateArticleContentProps> = ({
+    username,
     addArticleToFirebase,
 }) => {
     const [md, setMd] = useState<string>('');
@@ -61,6 +63,9 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
                 createdAt: {
                     date: new Date(),
                     formatedDate: formatDate(new Date()),
+                },
+                user: {
+                    username,
                 },
             };
             addArticleToFirebase(newArticle);
