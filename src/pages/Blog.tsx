@@ -31,6 +31,7 @@ const Blog: FC = () => {
                             user: {
                                 username: data.user.username,
                             },
+                            image: data.image,
                         };
                     }
                 );

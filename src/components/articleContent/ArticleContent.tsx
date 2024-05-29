@@ -14,6 +14,9 @@ const ArticleContent: FC<ArticleContentProps> = ({ articleData }) => {
         <div className={styles.article}>
             <h1 className={styles.title}>{articleData.name}</h1>
             <p className={styles.description}>{articleData.description}</p>
+            {articleData.image && (
+                <img src={articleData.image} alt="article_image" />
+            )}
             <ReactMarkdown className={styles.markdown}>
                 {articleData.content}
             </ReactMarkdown>

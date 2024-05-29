@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useCallback, useMemo, useRef, useState } from 'react';
 import SimpleMdeReact from 'react-simplemde-editor';
 
 import imgIcon from 'assets/icons/img.png';
@@ -10,11 +10,17 @@ import styles from './CreateArticleContent.module.css';
 
 interface CreateArticleContentProps {
     username: string;
+    articleImg: string;
+    isUploading: boolean;
+    uploaodImageInStorage: (file: File) => void;
     addArticleToFirebase: (article: IArticle) => void;
 }
 
 const CreateArticleContent: FC<CreateArticleContentProps> = ({
     username,
+    articleImg,
+    isUploading,
+    uploaodImageInStorage,
     addArticleToFirebase,
 }) => {
     const [md, setMd] = useState<string>('');
@@ -22,6 +28,8 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
         name: '',
         description: '',
     });
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     const options = useMemo(
         () => ({
@@ -67,6 +75,7 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
                 user: {
                     username,
                 },
+                image: articleImg,
             };
             addArticleToFirebase(newArticle);
             setArticle({
@@ -76,6 +85,15 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
             setMd('');
         }
     };
+
+    const handleChangeFile = async (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            uploaodImageInStorage(file);
+        }
+    };
+
+    const handleInputClick = () => inputRef.current?.click();
 
     return (
         <div className={styles.wrapper}>
@@ -100,10 +118,29 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
                         placeholder="Краткое описание статьи..."
                     ></textarea>
                 </div>
-                <div className={styles.select_img}>
-                    <img src={imgIcon} alt="img" />
-                    <p>SELECT IMAGE</p>
+
+                <div onClick={handleInputClick} className={styles.select_img}>
+                    {isUploading ? (
+                        <div>Upload...</div>
+                    ) : articleImg ? (
+                        <img
+                            className={styles.image}
+                            src={articleImg}
+                            alt="article_image"
+                        />
+                    ) : (
+                        <>
+                            <img src={imgIcon} alt="img" />
+                            <p>SELECT IMAGE</p>
+                        </>
+                    )}
                 </div>
+                <input
+                    ref={inputRef}
+                    onChange={handleChangeFile}
+                    type="file"
+                    hidden
+                />
             </div>
             <SimpleMdeReact
                 className={'editor'}

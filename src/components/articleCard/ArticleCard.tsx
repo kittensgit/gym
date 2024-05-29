@@ -20,22 +20,28 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
 
     return (
         <div className={styles.article}>
-            {/* <img
-                className={styles.article_img}
-                src={typeImg}
-                alt="article img"
-            /> */}
+            {article.image && (
+                <img
+                    className={styles.article_img}
+                    src={article.image}
+                    alt="article_img"
+                />
+            )}
             <div className={styles.distanceTime}>{distanceTime} назад</div>
-            <h3>
-                <Link to={`/article/${article.id}`}>{article.name}</Link>
-            </h3>
-            <p className={styles.article_text}>{article.description}</p>
-            <div className={styles.author}>
-                <div className={styles.info}>
-                    {/* <img src={krisImg} alt="avatar" /> */}
-                    <h4>{article.user.username}</h4>
+            <div className={styles.content}>
+                <h3>
+                    <Link to={`/article/${article.id}`}>{article.name}</Link>
+                </h3>
+                <p className={styles.article_text}>{article.description}</p>
+                <div className={styles.author}>
+                    <div className={styles.info}>
+                        {/* <img src={krisImg} alt="avatar" /> */}
+                        <h4>{article.user.username}</h4>
+                    </div>
+                    <p className={styles.date}>
+                        {article.createdAt.formatedDate}
+                    </p>
                 </div>
-                <p className={styles.date}>{article.createdAt.formatedDate}</p>
             </div>
         </div>
     );
