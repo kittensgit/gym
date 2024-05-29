@@ -1,4 +1,4 @@
-import { format, formatDistance } from 'date-fns';
+import { format, formatDistanceStrict } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
 export const formatDate = (date: Date) => {
@@ -8,7 +8,7 @@ export const formatDate = (date: Date) => {
 };
 
 export const distanceDate = (date: Date) => {
-    return formatDistance(new Date(), date, {
+    return formatDistanceStrict(new Date(), date, {
         locale: ru,
     });
 };

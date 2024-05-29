@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { Timestamp } from 'firebase/firestore';
 
 import { IArticle } from 'types/articles/articles';
+import { distanceDate } from 'helpers/formatDate';
 
 import typeImg from 'assets/type.jpg';
 
@@ -12,6 +14,10 @@ interface ArticleCardProps {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
+    const distanceTime = distanceDate(
+        (article.createdAt.date as Timestamp).toDate()
+    );
+
     return (
         <div className={styles.article}>
             {/* <img
@@ -19,16 +25,17 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
                 src={typeImg}
                 alt="article img"
             /> */}
-            <Link to={`/article/${article.id}`}>
-                <h3>{article.name}</h3>
-            </Link>
+            <div className={styles.distanceTime}>{distanceTime} назад</div>
+            <h3>
+                <Link to={`/article/${article.id}`}>{article.name}</Link>
+            </h3>
             <p className={styles.article_text}>{article.description}</p>
             <div className={styles.author}>
                 <div className={styles.info}>
                     {/* <img src={krisImg} alt="avatar" /> */}
                     <h4>Крис Котов</h4>
                 </div>
-                <p className={styles.date}>Май 25, 2024</p>
+                <p className={styles.date}>{article.createdAt.formatedDate}</p>
             </div>
         </div>
     );
