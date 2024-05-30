@@ -12,14 +12,16 @@ interface ArticleContentProps {
 const ArticleContent: FC<ArticleContentProps> = ({ articleData }) => {
     return (
         <div className={styles.article}>
-            <h1 className={styles.title}>{articleData.name}</h1>
-            <p className={styles.description}>{articleData.description}</p>
-            {articleData.image && (
-                <img src={articleData.image} alt="article_image" />
-            )}
-            <ReactMarkdown className={styles.markdown}>
-                {articleData.content}
-            </ReactMarkdown>
+            <div className={styles.article_content}>
+                <h1 className={styles.title}>{articleData.name}</h1>
+                <p className={styles.description}>{articleData.description}</p>
+                {articleData.image && (
+                    <img src={articleData.image} alt="article_image" />
+                )}
+                <ReactMarkdown className={styles.markdown}>
+                    {articleData.content}
+                </ReactMarkdown>
+            </div>
             <div className={styles.author}>
                 <div>
                     {/* <img/> */}
