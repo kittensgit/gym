@@ -1,5 +1,4 @@
-/* reset styles */
-html,
+reset styles html,
 body,
 div,
 span,
@@ -162,4 +161,78 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     flex-grow: 1;
+}
+
+.error {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    color: #b61111;
+    font-size: 30px;
+}
+
+.editor {
+    width: 100%;
+    border: 2px solid #605656;
+    border-radius: 20px;
+    transition: border 0.3s ease-in;
+}
+
+.editor:hover {
+    border: 2px solid #848383;
+}
+.editor:hover .CodeMirror {
+    border-top: 2px solid #848383;
+}
+
+.editor .editor-toolbar {
+    background-color: transparent;
+    border: none;
+}
+
+.editor .editor-toolbar button {
+    color: #fff !important;
+    transition: all 0.2s ease-in;
+}
+
+.editor .editor-toolbar button {
+    background: none;
+}
+
+.editor .CodeMirror {
+    border: none;
+    border-top: 2px solid #605656;
+    height: auto;
+    color: #fff;
+    background-color: transparent;
+    padding: 20px;
+    font-size: 20px;
+    transition: border-top 0.3s ease-in;
+}
+
+.editor .CodeMirror-cursor {
+    border-left: 1px solid #fff;
+}
+
+.editor .CodeMirror-placeholder {
+    color: #605656;
+}
+
+.editor .editor-statusbar {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+}
+
+@media (max-width: 500px) {
+    .editor .CodeMirror {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+    .editor .editor-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
 }

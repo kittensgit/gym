@@ -1,0 +1,154 @@
+.wrapper {
+    padding: 30px 20px;
+}
+
+.preview {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.preview h1 {
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.preview span {
+    color: #b61111;
+    font-family: 'Poller One', sans-serif;
+}
+
+.preview p {
+    color: #666666;
+    font-size: 24px;
+    text-align: center;
+    line-height: 115%;
+}
+
+.decor {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.decor img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.line {
+    width: 249px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 30px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 4px solid #464646;
+    border-radius: 35px;
+    padding: 5px 20px;
+    color: #fff;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    cursor: pointer;
+    transition: all 0.4s ease-in;
+}
+
+.btn img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    transition: transform 0.4s ease-in;
+}
+
+.btn:hover {
+    background-color: #222222;
+    transform: scale(1.01);
+    color: #b61111;
+}
+
+.btn:hover img {
+    transform: translateX(5px);
+}
+
+.articles {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media (max-width: 660px) {
+    .preview {
+        gap: 15px;
+    }
+    .preview h1 {
+        font-size: 32px;
+    }
+    .decor img {
+        width: 40px;
+        height: 40px;
+    }
+    .line {
+        width: 180px;
+    }
+    .preview p {
+        font-size: 20px;
+    }
+    .btn {
+        font-size: 21px;
+        padding: 2px 15px;
+    }
+    .btn img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .wrapper {
+        padding: 30px 15px;
+    }
+    .preview {
+        padding-top: 30px;
+    }
+    .preview h1 {
+        font-size: 28px;
+    }
+    .line {
+        width: 120px;
+    }
+    .preview p {
+        font-size: 18px;
+    }
+    .btn {
+        font-size: 18px;
+    }
+    .btn img {
+        width: 35px;
+        height: 35px;
+    }
+    .articles {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .btn {
+        font-size: 16px;
+    }
+    .btn img {
+        width: 30px;
+        height: 30px;
+    }
+}
