@@ -1,5 +1,5 @@
 .article {
-    padding: 20px;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -27,6 +27,24 @@
     line-height: 120%;
 }
 
+.author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.author h4 {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.author p {
+    font-size: 24px;
+    text-align: right;
+    font-weight: 600;
+    color: #b61111;
+}
+
 .markdown {
     overflow-wrap: break-word;
     line-height: 120%;
@@ -38,6 +56,7 @@
 .markdown h4,
 .markdown h5,
 .markdown h6 {
+    line-height: 110%;
     font-weight: bold;
 }
 
@@ -54,7 +73,7 @@
 }
 
 .markdown h1 {
-    font-size: 2.2em;
+    font-size: 1.9em;
 }
 
 .markdown h2 {
@@ -133,4 +152,63 @@
 .markdown img {
     max-width: 100%;
     height: auto;
+}
+
+@media (max-width: 800px) {
+    .title {
+        font-size: 32px;
+    }
+    .description {
+        font-size: 20px;
+    }
+    .article img {
+        height: 300px;
+    }
+    .author h4 {
+        font-size: 24px;
+    }
+    .author p {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .description {
+        font-size: 18px;
+    }
+    .article img {
+        height: 250px;
+    }
+    .markdown h1,
+    .markdown h2,
+    .markdown h3 {
+        margin: 10px 0;
+    }
+
+    .markdown h4,
+    .markdown h5,
+    .markdown h6 {
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .title {
+        font-size: 30px;
+    }
+    .article {
+        padding: 30px 15px;
+    }
+    .description {
+        font-size: 16px;
+    }
+    .article img {
+        height: 200px;
+    }
+    .author h4 {
+        font-size: 22px;
+    }
+    .author p {
+        font-size: 20px;
+    }
 }

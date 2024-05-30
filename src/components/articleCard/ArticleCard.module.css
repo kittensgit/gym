@@ -74,6 +74,7 @@
     font-size: 18px;
     color: #b61111;
     font-weight: 700;
+    text-align: right;
 }
 
 @media (max-width: 700px) {

@@ -20,6 +20,13 @@ const ArticleContent: FC<ArticleContentProps> = ({ articleData }) => {
             <ReactMarkdown className={styles.markdown}>
                 {articleData.content}
             </ReactMarkdown>
+            <div className={styles.author}>
+                <div>
+                    {/* <img/> */}
+                    <h4>{articleData.user.username}</h4>
+                </div>
+                <p>{articleData.createdAt.formatedDate}</p>
+            </div>
         </div>
     );
 };
