@@ -130,6 +130,7 @@ const Profile: FC = () => {
         <>
             {isAuth ? (
                 <ProfileContent
+                    userId={id}
                     username={username}
                     userProfileData={userInfo}
                     isLoading={isLoading}

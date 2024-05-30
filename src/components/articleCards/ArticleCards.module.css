@@ -1,0 +1,11 @@
+.articles {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media (max-width: 500px) {
+    .articles {
+        gap: 20px;
+    }
+}

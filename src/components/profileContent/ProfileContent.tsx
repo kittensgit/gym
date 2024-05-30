@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC, useRef } from 'react';
-
-import Workout from 'pages/Workout';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import ava from 'assets/icons/ava.png';
 import editIcon from 'assets/icons/edit.png';
@@ -16,6 +15,7 @@ interface ProfileContentProps {
     isEdit: boolean;
     isUploading: boolean;
     avatarUrl: string;
+    userId: string;
     uploadAvatarInStorage: (file: File) => void;
     updateUser: (name: string, value: string) => void;
     toggleEdit: () => void;
@@ -27,6 +27,7 @@ interface ProfileContentProps {
 }
 
 const ProfileContent: FC<ProfileContentProps> = ({
+    userId,
     username,
     isLoading,
     userProfileData,
@@ -38,6 +39,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
     toggleEdit,
     addUserInfoToFirebase,
 }) => {
+    const { pathname } = useLocation();
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleChange = (
@@ -163,32 +165,59 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             </button>
                         )}
                     </div>
-                    <div className={styles.text}>
-                        <h2>О себе</h2>
-                        {isEdit ? (
-                            <textarea
-                                className={styles.textarea}
-                                value={userProfileData.aboutText}
-                                name="aboutText"
-                                onChange={handleChange}
-                                placeholder="Напишите о себе и о своих достижениях"
-                            ></textarea>
-                        ) : isLoading ? (
-                            <div>Loading...</div>
-                        ) : (
-                            <p>
-                                {userProfileData.aboutText
-                                    ? userProfileData.aboutText
-                                    : 'Нет информации о себе'}
-                            </p>
-                        )}
-                        {isEdit && (
-                            <button className={styles.btn} onClick={onSaveEdit}>
-                                Применить изменения
-                            </button>
-                        )}
+                    <div className={styles.profile_content}>
+                        <div className={styles.text}>
+                            <h2>О себе</h2>
+                            {isEdit ? (
+                                <textarea
+                                    className={styles.textarea}
+                                    value={userProfileData.aboutText}
+                                    name="aboutText"
+                                    onChange={handleChange}
+                                    placeholder="Напишите о себе и о своих достижениях"
+                                ></textarea>
+                            ) : isLoading ? (
+                                <div>Loading...</div>
+                            ) : (
+                                <p>
+                                    {userProfileData.aboutText
+                                        ? userProfileData.aboutText
+                                        : 'Нет информации о себе'}
+                                </p>
+                            )}
+                            {isEdit && (
+                                <button
+                                    className={styles.btn}
+                                    onClick={onSaveEdit}
+                                >
+                                    Применить изменения
+                                </button>
+                            )}
+                        </div>
+                        <div className={styles.links}>
+                            <Link
+                                className={
+                                    pathname === `/profile/${userId}`
+                                        ? styles.active
+                                        : ''
+                                }
+                                to={''}
+                            >
+                                Тренировки
+                            </Link>
+                            <Link
+                                className={
+                                    pathname === `/profile/${userId}/articles`
+                                        ? styles.active
+                                        : ''
+                                }
+                                to="articles"
+                            >
+                                Статьи
+                            </Link>
+                        </div>
+                        <Outlet />
                     </div>
-                    <Workout />
                 </div>
             </div>
         </div>

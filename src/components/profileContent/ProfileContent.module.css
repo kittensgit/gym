@@ -3,7 +3,16 @@
 }
 
 .profile {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile_content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
 }
 
 .info {
@@ -106,7 +115,6 @@
 }
 
 .text {
-    padding: 25px 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -172,4 +180,26 @@
 .btn:hover {
     transform: scale(1.05);
     background-color: #605656;
+}
+
+.links {
+    display: flex;
+    gap: 15px;
+}
+
+.links a {
+    background-color: #6a6969;
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease-in;
+}
+
+.links a:hover {
+    background-color: #2e2e2e;
+}
+
+.active {
+    background-color: #272727 !important;
 }

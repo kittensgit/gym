@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Timestamp } from 'firebase/firestore';
 
-import ArticleCard from 'components/articleCard/ArticleCard';
+import ArticleCards from 'components/articleCards/ArticleCards';
 
 import { IArticle } from 'types/articles/articles';
 
@@ -48,11 +48,7 @@ const BlogContent: FC<BlogContentProps> = ({ articles, isLoading }) => {
             {isLoading ? (
                 <div>Loading...</div>
             ) : (
-                <div className={styles.articles}>
-                    {sortedArticles.map((article) => (
-                        <ArticleCard key={article.id} article={article} />
-                    ))}
-                </div>
+                <ArticleCards articles={sortedArticles} />
             )}
         </div>
     );
