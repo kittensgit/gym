@@ -116,6 +116,12 @@
 }
 
 @media (max-width: 500px) {
+    .wrapper {
+        padding: 30px 15px;
+    }
+    .preview {
+        padding-top: 30px;
+    }
     .preview h1 {
         font-size: 28px;
     }
@@ -131,5 +137,18 @@
     .btn img {
         width: 35px;
         height: 35px;
+    }
+    .articles {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .btn {
+        font-size: 16px;
+    }
+    .btn img {
+        width: 30px;
+        height: 30px;
     }
 }

@@ -75,3 +75,46 @@
     color: #b61111;
     font-weight: 700;
 }
+
+@media (max-width: 700px) {
+    .content {
+        padding: 25px;
+    }
+    .article_img {
+        height: 320px;
+    }
+    .article h3 {
+        font-size: 20px;
+    }
+    .article_text {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .content {
+        padding: 20px;
+    }
+    .article_img {
+        height: 240px;
+    }
+    .article h3 {
+        font-size: 18px;
+    }
+    .article_text {
+        font-size: 16px;
+    }
+    .info h4,
+    .date {
+        font-size: 16px;
+    }
+    .distanceTime {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .content {
+        padding: 15px;
+    }
+}
