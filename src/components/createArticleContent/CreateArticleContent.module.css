@@ -16,6 +16,7 @@
 .title h1 {
     font-size: 32px;
     font-weight: 600;
+    text-align: center;
 }
 
 .line {
@@ -81,11 +82,11 @@
     overflow: hidden;
     height: 300px;
     cursor: pointer;
-    transition: background-color 0.4s ease-in;
+    transition: opacity 0.4s ease-in;
 }
 
 .select_img:hover {
-    background-color: #464646;
+    opacity: 0.8;
 }
 
 .select_img p {
@@ -116,4 +117,77 @@
     transform: scale(1.03);
     background-color: #222222;
     color: #b61111;
+}
+
+@media (max-width: 1200px) {
+    .form {
+        gap: 30px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .form {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        gap: 20px;
+    }
+    .inputs textarea {
+        height: 150px;
+    }
+}
+
+@media (max-width: 800px) {
+    .title h1 {
+        font-size: 28px;
+    }
+    .title {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .line {
+        width: 50px;
+    }
+    .select_img {
+        height: 250px;
+    }
+    .select_img {
+        font-size: 14px;
+    }
+    .select_icon {
+        width: 150px;
+    }
+    .btn {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .wrapper {
+        padding: 30px 15px;
+        gap: 15px;
+    }
+    .title {
+        gap: 10px;
+    }
+    .title h1 {
+        font-size: 20px;
+    }
+    .form {
+        gap: 15px;
+    }
+    .inputs {
+        gap: 15px;
+    }
+    .inputs input,
+    .inputs textarea {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+    .select_img {
+        height: 200px;
+    }
 }

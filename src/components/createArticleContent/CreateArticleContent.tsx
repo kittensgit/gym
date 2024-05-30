@@ -130,7 +130,11 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
                         />
                     ) : (
                         <>
-                            <img src={imgIcon} alt="img" />
+                            <img
+                                className={styles.select_icon}
+                                src={imgIcon}
+                                alt="img"
+                            />
                             <p>SELECT IMAGE</p>
                         </>
                     )}

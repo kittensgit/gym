@@ -223,3 +223,16 @@ body {
     background-color: #f5f5f5;
     border-top: 1px solid #ddd;
 }
+
+@media (max-width: 500px) {
+    .editor .CodeMirror {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+    .editor .editor-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+}
