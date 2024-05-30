@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useRef } from 'react';
 
 import Workout from 'pages/Workout';
 
-import ava from 'assets/ava.png';
+import ava from 'assets/icons/ava.png';
 import editIcon from 'assets/icons/edit.png';
 
 import { IUpdateUser, IUser } from 'types/user/user';
@@ -65,7 +65,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
         }
     };
 
-    const handleClickInput = () => inputRef.current?.click();
+    const handleClickInput = () => isEdit && inputRef.current?.click();
 
     return (
         <div className={styles.wrapper}>
@@ -78,11 +78,26 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             ) : isUploading ? (
                                 <div>Uploading...</div>
                             ) : (
-                                <img
+                                <div
+                                    className={styles.avatarContainer}
                                     onClick={handleClickInput}
-                                    src={avatarUrl ? avatarUrl : ava}
-                                    alt="avatar"
-                                />
+                                >
+                                    <img
+                                        className={
+                                            isEdit
+                                                ? styles.ava +
+                                                  ' ' +
+                                                  styles.ava_edit
+                                                : styles.ava
+                                        }
+                                        onClick={handleClickInput}
+                                        src={avatarUrl ? avatarUrl : ava}
+                                        alt="avatar"
+                                    />
+                                    {isEdit && (
+                                        <div className={styles.plusIcon}></div>
+                                    )}
+                                </div>
                             )}
                             <input
                                 ref={inputRef}

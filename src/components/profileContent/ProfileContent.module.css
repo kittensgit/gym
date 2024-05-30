@@ -14,13 +14,46 @@
     background-color: #1e1e1e;
 }
 
-.info_content img {
-    object-fit: cover;
-    border-radius: 50%;
+.avatarContainer {
+    position: relative;
     width: 250px;
     height: 250px;
+}
+
+.ava {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     border: 10px solid #161515;
+}
+
+.ava_edit {
     cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.plusIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-image: url('assets/icons/add_plus.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.avatarContainer:hover .plusIcon {
+    opacity: 1;
+}
+
+.avatarContainer:hover .ava_edit {
+    opacity: 0.7;
 }
 
 .info_content {
