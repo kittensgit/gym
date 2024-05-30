@@ -1,11 +1,9 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC, useRef } from 'react';
 
 import Workout from 'pages/Workout';
 
-import bg from 'assets/back.jpg';
-import ava from 'assets/avam.jpg';
+import ava from 'assets/ava.png';
 import editIcon from 'assets/icons/edit.png';
-import thunderIcon from 'assets/icons/thunder.png';
 
 import { IUpdateUser, IUser } from 'types/user/user';
 
@@ -14,14 +12,17 @@ import styles from './ProfileContent.module.css';
 interface ProfileContentProps {
     username: IUser['username'];
     userProfileData: IUpdateUser;
-    avatarUrl: string;
     isLoading: boolean;
     isEdit: boolean;
+    isUploading: boolean;
+    avatarUrl: string;
+    uploadAvatarInStorage: (file: File) => void;
     updateUser: (name: string, value: string) => void;
     toggleEdit: () => void;
     addUserInfoToFirebase: (
         aim: IUpdateUser['aim'],
-        aboutText: IUpdateUser['aboutText']
+        aboutText: IUpdateUser['aboutText'],
+        avatarUrl?: IUser['avatarUrl']
     ) => void;
 }
 
@@ -31,10 +32,14 @@ const ProfileContent: FC<ProfileContentProps> = ({
     userProfileData,
     isEdit,
     avatarUrl,
+    isUploading,
+    uploadAvatarInStorage,
     updateUser,
     toggleEdit,
     addUserInfoToFirebase,
 }) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
     const handleChange = (
         e:
             | React.ChangeEvent<HTMLInputElement>
@@ -46,8 +51,21 @@ const ProfileContent: FC<ProfileContentProps> = ({
 
     const onSaveEdit = () => {
         toggleEdit();
-        addUserInfoToFirebase(userProfileData.aim, userProfileData.aboutText);
+        addUserInfoToFirebase(
+            userProfileData.aim,
+            userProfileData.aboutText,
+            avatarUrl
+        );
     };
+
+    const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            uploadAvatarInStorage(file);
+        }
+    };
+
+    const handleClickInput = () => inputRef.current?.click();
 
     return (
         <div className={styles.wrapper}>
@@ -55,9 +73,22 @@ const ProfileContent: FC<ProfileContentProps> = ({
                 <div className={styles.profile}>
                     <div className={styles.info}>
                         <div className={styles.info_content}>
-                            <img
-                                src={!avatarUrl ? ava : avatarUrl}
-                                alt="avatar"
+                            {isLoading ? (
+                                <div>Loading...</div>
+                            ) : isUploading ? (
+                                <div>Uploading...</div>
+                            ) : (
+                                <img
+                                    onClick={handleClickInput}
+                                    src={avatarUrl ? avatarUrl : ava}
+                                    alt="avatar"
+                                />
+                            )}
+                            <input
+                                ref={inputRef}
+                                onChange={handleChangeFile}
+                                type="file"
+                                hidden
                             />
                             {isEdit ? (
                                 <div className={styles.about}>

@@ -7,23 +7,33 @@ import {
     setDoc,
     updateDoc,
 } from 'firebase/firestore';
+import {
+    getDownloadURL,
+    getStorage,
+    ref,
+    uploadBytesResumable,
+} from 'firebase/storage';
 
 import ProfileContent from 'components/profileContent/ProfileContent';
 
 import { useAuth } from 'hooks/useAuth';
-import { IUpdateUser } from 'types/user/user';
+import { IUpdateUser, IUser } from 'types/user/user';
 
 const Profile: FC = () => {
-    const { isAuth, username, id, avatarUrl } = useAuth();
-    const db = getFirestore();
+    const { isAuth, username, id } = useAuth();
 
-    const [user, setUser] = useState<IUpdateUser>({
+    const db = getFirestore();
+    const storage = getStorage();
+
+    const [userInfo, setUserInfo] = useState<IUpdateUser>({
         aim: '',
         aboutText: '',
     });
+    const [avatarUrl, setAvatarUrl] = useState<string>('');
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isUploading, setIsUploading] = useState<boolean>(false);
 
     useEffect(() => {
         const getUserInfoFromFirebase = async () => {
@@ -34,8 +44,9 @@ const Profile: FC = () => {
                     const docSnapshot = await getDoc(userRef);
                     if (docSnapshot.exists()) {
                         const userData = docSnapshot.data();
-                        const { aim, aboutText } = userData;
-                        setUser({ aim, aboutText });
+                        const { aim, aboutText, avatarUrl } = userData;
+                        setUserInfo({ aim, aboutText });
+                        setAvatarUrl(avatarUrl);
                     }
                 } finally {
                     setIsLoading(false);
@@ -47,8 +58,37 @@ const Profile: FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isEdit]);
 
-    const updateUser = (name: string, value: string) => {
-        setUser((prev) => ({
+    const uploadAvatarInStorage = (file: File) => {
+        try {
+            const storageRef = ref(storage, `users/avatars/${id}/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    setIsUploading(true);
+                },
+                (error) => {
+                    console.error('Upload failed', error);
+                    setIsUploading(false);
+                },
+                async () => {
+                    const downloadURL = await getDownloadURL(
+                        uploadTask.snapshot.ref
+                    );
+                    setAvatarUrl(downloadURL);
+                    setIsUploading(false);
+                }
+            );
+        } catch (error) {
+            console.error('Failed to upload photo', error);
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const updateUserInfo = (name: string, value: string) => {
+        setUserInfo((prev) => ({
             ...prev,
             [name]: value,
         }));
@@ -60,21 +100,24 @@ const Profile: FC = () => {
 
     const addUserInfoToFirebase = async (
         aim: IUpdateUser['aim'],
-        aboutText: IUpdateUser['aboutText']
+        aboutText: IUpdateUser['aboutText'],
+        avatarUrl?: IUser['avatarUrl']
     ) => {
         try {
             setIsLoading(true);
             if (id) {
                 const userRef = doc(db, 'users', `${id}`);
-                if (user.aim) {
+                if (userInfo.aim) {
                     await updateDoc(userRef, {
                         aim,
                         aboutText,
+                        avatarUrl,
                     });
                 } else {
                     await setDoc(userRef, {
                         aim,
                         aboutText,
+                        avatarUrl,
                     });
                 }
             }
@@ -88,11 +131,13 @@ const Profile: FC = () => {
             {isAuth ? (
                 <ProfileContent
                     username={username}
-                    userProfileData={user}
-                    avatarUrl={avatarUrl}
+                    userProfileData={userInfo}
                     isLoading={isLoading}
                     isEdit={isEdit}
-                    updateUser={updateUser}
+                    isUploading={isUploading}
+                    avatarUrl={avatarUrl}
+                    uploadAvatarInStorage={uploadAvatarInStorage}
+                    updateUser={updateUserInfo}
                     toggleEdit={toggleEdit}
                     addUserInfoToFirebase={addUserInfoToFirebase}
                 />
