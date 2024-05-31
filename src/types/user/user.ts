@@ -3,12 +3,9 @@ export interface IUser {
     username: string;
     id: string;
     token: string;
+    aim?: string;
+    aboutText?: string;
     avatarUrl?: string;
-}
-
-export interface IUpdateUser {
-    aim: string;
-    aboutText: string;
 }
 
 export interface ISet {

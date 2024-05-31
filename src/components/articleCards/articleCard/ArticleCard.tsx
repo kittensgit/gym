@@ -5,6 +5,8 @@ import { Timestamp } from 'firebase/firestore';
 import { IArticle } from 'types/articles/articles';
 import { distanceDate } from 'helpers/formatDate';
 
+import avaIcon from 'assets/icons/ava.png';
+
 import styles from './ArticleCard.module.css';
 
 interface ArticleCardProps {
@@ -12,6 +14,7 @@ interface ArticleCardProps {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
+    console.log(article);
     const distanceTime = distanceDate(
         (article.createdAt.date as Timestamp).toDate()
     );
@@ -32,7 +35,14 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
                     <p className={styles.article_text}>{article.description}</p>
                     <div className={styles.author}>
                         <div className={styles.info}>
-                            {/* <img src={krisImg} alt="avatar" /> */}
+                            {article.user.avatarUrl ? (
+                                <img
+                                    src={article.user.avatarUrl}
+                                    alt="avatar"
+                                />
+                            ) : (
+                                <img src={avaIcon} alt="avatar" />
+                            )}
                             <h4>{article.user.username}</h4>
                         </div>
                         <p className={styles.date}>

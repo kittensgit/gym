@@ -14,7 +14,7 @@ import { useAuth } from 'hooks/useAuth';
 import { IArticle } from 'types/articles/articles';
 
 const CreateArticle: FC = () => {
-    const { isAuth, username } = useAuth();
+    const { isAuth, username, avatarUrl } = useAuth();
     const navigate = useNavigate();
 
     const db = getFirestore();
@@ -72,6 +72,7 @@ const CreateArticle: FC = () => {
                 ) : (
                     <CreateArticleContent
                         username={username}
+                        avatarUrl={avatarUrl}
                         articleImg={articleImg}
                         isUploading={isUploading}
                         uploaodImageInStorage={uploaodImageInStorage}

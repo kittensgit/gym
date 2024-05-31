@@ -24,7 +24,10 @@ const ArticleContent: FC<ArticleContentProps> = ({ articleData }) => {
             </div>
             <div className={styles.author}>
                 <div>
-                    {/* <img/> */}
+                    {articleData.user.avatarUrl && (
+                        <img src={articleData.user.avatarUrl} alt="ava" />
+                    )}
+
                     <h4>{articleData.user.username}</h4>
                 </div>
                 <p>{articleData.createdAt.formatedDate}</p>

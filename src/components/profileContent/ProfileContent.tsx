@@ -4,25 +4,30 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import ava from 'assets/icons/ava.png';
 import editIcon from 'assets/icons/edit.png';
 
-import { IUpdateUser, IUser } from 'types/user/user';
+import { IUser } from 'types/user/user';
 
 import styles from './ProfileContent.module.css';
 
+interface IUserProfileData {
+    aim: IUser['aim'];
+    aboutText: IUser['aboutText'];
+}
+
 interface ProfileContentProps {
     username: IUser['username'];
-    userProfileData: IUpdateUser;
+    userProfileData: IUserProfileData;
     isLoading: boolean;
     isEdit: boolean;
     isUploading: boolean;
-    avatarUrl: string;
+    avatarUrl: IUser['avatarUrl'];
     userId: string;
     uploadAvatarInStorage: (file: File) => void;
     updateUser: (name: string, value: string) => void;
     toggleEdit: () => void;
     addUserInfoToFirebase: (
-        aim: IUpdateUser['aim'],
-        aboutText: IUpdateUser['aboutText'],
-        avatarUrl?: IUser['avatarUrl']
+        aim: IUser['aim'],
+        aboutText: IUser['aboutText'],
+        avatarUrl: IUser['avatarUrl']
     ) => void;
 }
 

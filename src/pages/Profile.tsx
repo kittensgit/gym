@@ -17,19 +17,23 @@ import {
 import ProfileContent from 'components/profileContent/ProfileContent';
 
 import { useAuth } from 'hooks/useAuth';
-import { IUpdateUser, IUser } from 'types/user/user';
+import { IUser } from 'types/user/user';
+
+interface IUserInfo {
+    aim: IUser['aim'];
+    aboutText: IUser['aboutText'];
+}
 
 const Profile: FC = () => {
     const { isAuth, username, id } = useAuth();
-
     const db = getFirestore();
     const storage = getStorage();
 
-    const [userInfo, setUserInfo] = useState<IUpdateUser>({
+    const [userInfo, setUserInfo] = useState<IUserInfo>({
         aim: '',
         aboutText: '',
     });
-    const [avatarUrl, setAvatarUrl] = useState<string>('');
+    const [avatarUrl, setAvatarUrl] = useState<IUser['avatarUrl']>('');
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,6 +51,14 @@ const Profile: FC = () => {
                         const { aim, aboutText, avatarUrl } = userData;
                         setUserInfo({ aim, aboutText });
                         setAvatarUrl(avatarUrl);
+                        const user = localStorage.getItem('user');
+                        localStorage.setItem(
+                            'user',
+                            JSON.stringify({
+                                ...JSON.parse(user!),
+                                avatarUrl,
+                            })
+                        );
                     }
                 } finally {
                     setIsLoading(false);
@@ -99,9 +111,9 @@ const Profile: FC = () => {
     };
 
     const addUserInfoToFirebase = async (
-        aim: IUpdateUser['aim'],
-        aboutText: IUpdateUser['aboutText'],
-        avatarUrl?: IUser['avatarUrl']
+        aim: IUser['aim'],
+        aboutText: IUser['aboutText'],
+        avatarUrl: IUser['avatarUrl']
     ) => {
         try {
             setIsLoading(true);

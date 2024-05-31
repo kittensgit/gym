@@ -20,11 +20,12 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.user.email = action.payload.email;
-            state.user.id = action.payload.id;
-            state.user.token = action.payload.token;
-            state.user.username = action.payload.username;
-            state.user.avatarUrl = action.payload.avatarUrl;
+            const { email, id, token, username, avatarUrl } = action.payload;
+            state.user.email = email;
+            state.user.id = id;
+            state.user.token = token;
+            state.user.username = username;
+            state.user.avatarUrl = avatarUrl;
         },
         removeUser: (state) => {
             state.user.email = '';

@@ -8,17 +8,16 @@ import {
 
 import SignUpContent from 'components/signUpContent/SignUpContent';
 
-import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useAuth } from 'hooks/useAuth';
 
 import { IUser } from 'types/user/user';
 
-import { setUser } from '../redux/ProfileSlice';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 const SignUp: FC = () => {
+    const [_, setUser] = useLocalStorage('user', {});
     const { isAuth, id } = useAuth();
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
 
     const [errorMes, setErrorMes] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -43,14 +42,12 @@ const SignUp: FC = () => {
                 displayName: username,
             });
 
-            dispatch(
-                setUser({
-                    email: user.email,
-                    id: user.uid,
-                    token: user.refreshToken,
-                    username,
-                })
-            );
+            setUser({
+                email: user.email,
+                username: user.displayName,
+                id: user.uid,
+                token: user.refreshToken,
+            });
 
             navigate(`/profile/${user.uid}`);
         } catch (serverError: any) {

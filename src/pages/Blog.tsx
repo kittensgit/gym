@@ -30,6 +30,7 @@ const Blog: FC = () => {
                             },
                             user: {
                                 username: data.user.username,
+                                avatarUrl: data.user.avatarUrl,
                             },
                             image: data.image,
                         };

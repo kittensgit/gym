@@ -12,11 +12,13 @@ interface CreateArticleContentProps {
     username: string;
     articleImg: string;
     isUploading: boolean;
+    avatarUrl?: string;
     uploaodImageInStorage: (file: File) => void;
     addArticleToFirebase: (article: IArticle) => void;
 }
 
 const CreateArticleContent: FC<CreateArticleContentProps> = ({
+    avatarUrl,
     username,
     articleImg,
     isUploading,
@@ -74,6 +76,7 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
                 },
                 user: {
                     username,
+                    avatarUrl,
                 },
                 image: articleImg,
             };

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { IArticle } from 'types/articles/articles';
 
 import ArticleCard from './articleCard/ArticleCard';

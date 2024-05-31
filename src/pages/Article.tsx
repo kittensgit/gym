@@ -21,6 +21,7 @@ const Article: FC = () => {
         },
         user: {
             username: '',
+            avatarUrl: '',
         },
     });
     const [isLoading, setIsLoading] = useState<boolean>(false);
