@@ -42,9 +42,22 @@
     align-items: center;
 }
 
-.author h4 {
+.info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.info h4 {
     font-size: 26px;
     font-weight: 700;
+}
+
+.info img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .author p {

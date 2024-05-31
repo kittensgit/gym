@@ -13,6 +13,7 @@ import {
     ref,
     uploadBytesResumable,
 } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
 
 import ProfileContent from 'components/profileContent/ProfileContent';
 
@@ -25,6 +26,7 @@ interface IUserInfo {
 }
 
 const Profile: FC = () => {
+    const auth = getAuth();
     const { isAuth, username, id } = useAuth();
     const db = getFirestore();
     const storage = getStorage();
@@ -72,26 +74,33 @@ const Profile: FC = () => {
 
     const uploadAvatarInStorage = (file: File) => {
         try {
-            const storageRef = ref(storage, `users/avatars/${id}/${file.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
+            const currentUser = auth.currentUser;
 
-            uploadTask.on(
-                'state_changed',
-                (snapshot) => {
-                    setIsUploading(true);
-                },
-                (error) => {
-                    console.error('Upload failed', error);
-                    setIsUploading(false);
-                },
-                async () => {
-                    const downloadURL = await getDownloadURL(
-                        uploadTask.snapshot.ref
-                    );
-                    setAvatarUrl(downloadURL);
-                    setIsUploading(false);
-                }
-            );
+            if (currentUser) {
+                const storageRef = ref(
+                    storage,
+                    `users/avatars/${id}/${file.name}`
+                );
+                const uploadTask = uploadBytesResumable(storageRef, file);
+
+                uploadTask.on(
+                    'state_changed',
+                    (snapshot) => {
+                        setIsUploading(true);
+                    },
+                    (error) => {
+                        console.error('Upload failed', error);
+                        setIsUploading(false);
+                    },
+                    async () => {
+                        const downloadURL = await getDownloadURL(
+                            uploadTask.snapshot.ref
+                        );
+                        setAvatarUrl(downloadURL);
+                        setIsUploading(false);
+                    }
+                );
+            }
         } catch (error) {
             console.error('Failed to upload photo', error);
         } finally {

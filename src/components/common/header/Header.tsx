@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import logo from 'assets/icons/logo.png';
+import avaIcon from 'assets/icons/ava.png';
 
 import { IUser } from 'types/user/user';
 
@@ -10,10 +11,10 @@ import styles from './Header.module.css';
 interface HeaderProps {
     isAuth: boolean;
     userId: IUser['id'];
-    username: IUser['username'];
+    avatarUrl: IUser['avatarUrl'];
 }
 
-const Header: FC<HeaderProps> = ({ isAuth, userId, username }) => {
+const Header: FC<HeaderProps> = ({ isAuth, userId, avatarUrl }) => {
     const { pathname } = useLocation();
     return (
         <header className={styles.header}>
@@ -52,18 +53,11 @@ const Header: FC<HeaderProps> = ({ isAuth, userId, username }) => {
                                     }
                                     to={`/profile/${userId}`}
                                 >
-                                    <div className={styles.link_words}>
-                                        {username
-                                            .split(' ')
-                                            .map((item, index) => (
-                                                <div key={index}>
-                                                    <span>
-                                                        {item.charAt(0)}
-                                                    </span>
-                                                    {item.slice(1)}{' '}
-                                                </div>
-                                            ))}
-                                    </div>
+                                    <img
+                                        className={styles.ava}
+                                        src={avatarUrl ? avatarUrl : avaIcon}
+                                        alt="ava"
+                                    />
                                 </Link>
                             </li>
                         ) : (

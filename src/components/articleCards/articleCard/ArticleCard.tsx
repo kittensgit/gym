@@ -14,7 +14,6 @@ interface ArticleCardProps {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
-    console.log(article);
     const distanceTime = distanceDate(
         (article.createdAt.date as Timestamp).toDate()
     );
@@ -35,14 +34,14 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
                     <p className={styles.article_text}>{article.description}</p>
                     <div className={styles.author}>
                         <div className={styles.info}>
-                            {article.user.avatarUrl ? (
-                                <img
-                                    src={article.user.avatarUrl}
-                                    alt="avatar"
-                                />
-                            ) : (
-                                <img src={avaIcon} alt="avatar" />
-                            )}
+                            <img
+                                src={
+                                    article.user.avatarUrl
+                                        ? article.user.avatarUrl
+                                        : avaIcon
+                                }
+                                alt="avatar"
+                            />
                             <h4>{article.user.username}</h4>
                         </div>
                         <p className={styles.date}>

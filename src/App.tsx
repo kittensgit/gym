@@ -17,10 +17,10 @@ import UserArticles from 'pages/UserArticles';
 import { useAuth } from 'hooks/useAuth';
 
 const App: FC = () => {
-    const { isAuth, username, id } = useAuth();
+    const { isAuth, username, id, avatarUrl } = useAuth();
     return (
         <div className="app">
-            <Header isAuth={isAuth} userId={id} username={username} />
+            <Header isAuth={isAuth} userId={id} avatarUrl={avatarUrl} />
             <main className="main_wrapper">
                 <Routes>
                     <Route path="/" element={<Home />} />
