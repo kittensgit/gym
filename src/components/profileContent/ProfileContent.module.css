@@ -71,8 +71,14 @@
     gap: 20px;
 }
 
+.btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 .edit {
-    align-self: flex-start;
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -87,6 +93,30 @@
 
 .edit:hover {
     transform: scale(1.1);
+}
+
+.logout {
+    font-size: 18px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease-in;
+}
+
+.logout:hover {
+    color: #b61111;
+}
+
+.logout img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
 }
 
 .about {

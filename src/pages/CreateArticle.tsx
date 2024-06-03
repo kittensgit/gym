@@ -7,7 +7,6 @@ import {
     ref,
     uploadBytesResumable,
 } from 'firebase/storage';
-import { getAuth } from 'firebase/auth';
 
 import CreateArticleContent from 'components/createArticleContent/CreateArticleContent';
 
@@ -15,7 +14,6 @@ import { useAuth } from 'hooks/useAuth';
 import { IArticle } from 'types/articles/articles';
 
 const CreateArticle: FC = () => {
-    const auth = getAuth();
     const { isAuth, username, avatarUrl } = useAuth();
     const navigate = useNavigate();
 
@@ -39,30 +37,26 @@ const CreateArticle: FC = () => {
 
     const uploaodImageInStorage = async (file: File) => {
         try {
-            const currentUser = auth.currentUser;
+            const storageRef = ref(storage, `articles/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
 
-            if (currentUser) {
-                const storageRef = ref(storage, `articles/${file.name}`);
-                const uploadTask = uploadBytesResumable(storageRef, file);
-
-                uploadTask.on(
-                    'state_changed',
-                    (snapshot) => {
-                        setIsUploading(true);
-                    },
-                    (error) => {
-                        console.error('Upload failed', error);
-                        setIsUploading(false);
-                    },
-                    async () => {
-                        const downloadURL = await getDownloadURL(
-                            uploadTask.snapshot.ref
-                        );
-                        setArticleImg(downloadURL);
-                        setIsUploading(false);
-                    }
-                );
-            }
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    setIsUploading(true);
+                },
+                (error) => {
+                    console.error('Upload failed', error);
+                    setIsUploading(false);
+                },
+                async () => {
+                    const downloadURL = await getDownloadURL(
+                        uploadTask.snapshot.ref
+                    );
+                    setArticleImg(downloadURL);
+                    setIsUploading(false);
+                }
+            );
         } catch (error) {
             console.error('Failed to upload photo', error);
         } finally {

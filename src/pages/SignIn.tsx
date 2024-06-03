@@ -6,65 +6,95 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
 } from 'firebase/auth';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 import SignInContent from 'components/signInContent/SignInContent';
 
 import { useAuth } from 'hooks/useAuth';
-import { useLocalStorage } from 'hooks/useLocalStorage';
-
+import { useAppDispatch } from 'hooks/useAppDispatch';
 import { IUser } from 'types/user/user';
 
-const SignIn: FC = () => {
-    const [_, setUser] = useLocalStorage('user', {});
+import { setUser } from '../redux/ProfileSlice';
 
+const SignIn: FC = () => {
     const auth = getAuth();
+    const db = getFirestore();
     const { isAuth, id } = useAuth();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
 
-    const onSignIn = (email: IUser['email'], password: string) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(({ user }) => {
-                setLoading(true);
-                setUser({
-                    email: user.email,
-                    username: user.displayName,
-                    id: user.uid,
-                    token: user.refreshToken,
-                });
-                navigate(`/profile/${id}`);
-            })
-            .catch((error: any) => {
-                if (error instanceof Error) {
-                    setErrorMessage(error.message);
-                }
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+    const onSignIn = async (email: IUser['email'], password: string) => {
+        try {
+            setLoading(true);
+
+            const { user } = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            const userRef = doc(db, 'users', `${user.uid}`);
+            const docSnapshot = await getDoc(userRef);
+
+            if (docSnapshot.exists()) {
+                const userData = docSnapshot.data();
+                const { avatarUrl } = userData as IUser;
+
+                dispatch(
+                    setUser({
+                        email: user.email,
+                        token: user.refreshToken,
+                        id: user.uid,
+                        username: user.displayName,
+                        avatarUrl: avatarUrl,
+                    })
+                );
+
+                navigate(`/profile/${user.uid}`);
+            } else {
+                setErrorMessage('User data not found');
+            }
+        } catch (error: any) {
+            if (error instanceof Error) {
+                setErrorMessage(error.message);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const onGoogleSignIn = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-            .then(({ user }) => {
-                setLoading(true);
-                setUser({
-                    email: user.email,
-                    username: user.displayName,
-                    id: user.uid,
-                    token: user.refreshToken,
-                });
-            })
-            .catch((error: any) => {
-                if (error instanceof Error) {
-                    setErrorMessage(error.message);
-                }
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+    const onGoogleSignIn = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const { user } = await signInWithPopup(auth, provider);
+
+            const userRef = doc(db, 'users', `${user.uid}`);
+            const docSnapshot = await getDoc(userRef);
+
+            if (docSnapshot.exists()) {
+                const userData = docSnapshot.data();
+                const { avatarUrl } = userData as IUser;
+
+                dispatch(
+                    setUser({
+                        email: user.email,
+                        username: user.displayName,
+                        id: user.uid,
+                        token: user.refreshToken,
+                        avatarUrl: avatarUrl,
+                    })
+                );
+            }
+        } catch (error: any) {
+            if (error instanceof Error) {
+                setErrorMessage(error.message);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

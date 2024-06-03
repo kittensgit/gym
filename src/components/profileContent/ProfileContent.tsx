@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FC, useRef } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
-import ava from 'assets/icons/ava.png';
+import avaIcon from 'assets/icons/ava.png';
 import editIcon from 'assets/icons/edit.png';
+import logoutIcon from 'assets/icons/logout.png';
 
 import { IUser } from 'types/user/user';
 
@@ -29,6 +30,7 @@ interface ProfileContentProps {
         aboutText: IUser['aboutText'],
         avatarUrl: IUser['avatarUrl']
     ) => void;
+    onLogOut: () => void;
 }
 
 const ProfileContent: FC<ProfileContentProps> = ({
@@ -43,6 +45,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
     updateUser,
     toggleEdit,
     addUserInfoToFirebase,
+    onLogOut,
 }) => {
     const { pathname } = useLocation();
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -97,8 +100,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                                                   styles.ava_edit
                                                 : styles.ava
                                         }
-                                        onClick={handleClickInput}
-                                        src={avatarUrl ? avatarUrl : ava}
+                                        src={avatarUrl ? avatarUrl : avaIcon}
                                         alt="avatar"
                                     />
                                     {isEdit && (
@@ -162,12 +164,21 @@ const ProfileContent: FC<ProfileContentProps> = ({
                             )}
                         </div>
                         {!isEdit && (
-                            <button
-                                onClick={toggleEdit}
-                                className={styles.edit}
-                            >
-                                <img src={editIcon} alt="edit" />
-                            </button>
+                            <div className={styles.btns}>
+                                <button
+                                    onClick={toggleEdit}
+                                    className={styles.edit}
+                                >
+                                    <img src={editIcon} alt="edit" />
+                                </button>
+                                <button
+                                    onClick={onLogOut}
+                                    className={styles.logout}
+                                >
+                                    Выйти
+                                    <img src={logoutIcon} alt="logout" />
+                                </button>
+                            </div>
                         )}
                     </div>
                     <div className={styles.profile_content}>

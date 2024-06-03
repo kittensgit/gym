@@ -13,12 +13,14 @@ import {
     ref,
     uploadBytesResumable,
 } from 'firebase/storage';
-import { getAuth } from 'firebase/auth';
 
 import ProfileContent from 'components/profileContent/ProfileContent';
 
 import { useAuth } from 'hooks/useAuth';
+import { useAppDispatch } from 'hooks/useAppDispatch';
 import { IUser } from 'types/user/user';
+
+import { removeUser } from '../redux/ProfileSlice';
 
 interface IUserInfo {
     aim: IUser['aim'];
@@ -26,10 +28,11 @@ interface IUserInfo {
 }
 
 const Profile: FC = () => {
-    const auth = getAuth();
-    const { isAuth, username, id } = useAuth();
     const db = getFirestore();
     const storage = getStorage();
+    const dispatch = useAppDispatch();
+
+    const { isAuth, username, id } = useAuth();
 
     const [userInfo, setUserInfo] = useState<IUserInfo>({
         aim: '',
@@ -53,14 +56,6 @@ const Profile: FC = () => {
                         const { aim, aboutText, avatarUrl } = userData;
                         setUserInfo({ aim, aboutText });
                         setAvatarUrl(avatarUrl);
-                        const user = localStorage.getItem('user');
-                        localStorage.setItem(
-                            'user',
-                            JSON.stringify({
-                                ...JSON.parse(user!),
-                                avatarUrl,
-                            })
-                        );
                     }
                 } finally {
                     setIsLoading(false);
@@ -74,33 +69,26 @@ const Profile: FC = () => {
 
     const uploadAvatarInStorage = (file: File) => {
         try {
-            const currentUser = auth.currentUser;
+            const storageRef = ref(storage, `users/avatars/${id}/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
 
-            if (currentUser) {
-                const storageRef = ref(
-                    storage,
-                    `users/avatars/${id}/${file.name}`
-                );
-                const uploadTask = uploadBytesResumable(storageRef, file);
-
-                uploadTask.on(
-                    'state_changed',
-                    (snapshot) => {
-                        setIsUploading(true);
-                    },
-                    (error) => {
-                        console.error('Upload failed', error);
-                        setIsUploading(false);
-                    },
-                    async () => {
-                        const downloadURL = await getDownloadURL(
-                            uploadTask.snapshot.ref
-                        );
-                        setAvatarUrl(downloadURL);
-                        setIsUploading(false);
-                    }
-                );
-            }
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    setIsUploading(true);
+                },
+                (error) => {
+                    console.error('Upload failed', error);
+                    setIsUploading(false);
+                },
+                async () => {
+                    const downloadURL = await getDownloadURL(
+                        uploadTask.snapshot.ref
+                    );
+                    setAvatarUrl(downloadURL);
+                    setIsUploading(false);
+                }
+            );
         } catch (error) {
             console.error('Failed to upload photo', error);
         } finally {
@@ -147,17 +135,22 @@ const Profile: FC = () => {
         }
     };
 
+    const onLogOut = () => {
+        dispatch(removeUser());
+    };
+
     return (
         <>
             {isAuth ? (
                 <ProfileContent
                     userId={id}
                     username={username}
+                    avatarUrl={avatarUrl}
                     userProfileData={userInfo}
                     isLoading={isLoading}
                     isEdit={isEdit}
                     isUploading={isUploading}
-                    avatarUrl={avatarUrl}
+                    onLogOut={onLogOut}
                     uploadAvatarInStorage={uploadAvatarInStorage}
                     updateUser={updateUserInfo}
                     toggleEdit={toggleEdit}
