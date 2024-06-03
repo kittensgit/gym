@@ -12,7 +12,7 @@ interface CreateArticleContentProps {
     username: string;
     articleImg: string;
     isUploading: boolean;
-    avatarUrl?: string;
+    avatarUrl: string | null;
     uploaodImageInStorage: (file: File) => void;
     addArticleToFirebase: (article: IArticle) => void;
 }

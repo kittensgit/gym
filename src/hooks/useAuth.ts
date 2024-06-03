@@ -10,6 +10,6 @@ export const useAuth = () => {
         id,
         token,
         username,
-        avatarUrl,
+        avatarUrl: avatarUrl ? avatarUrl : null,
     };
 };

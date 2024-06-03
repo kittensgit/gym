@@ -19,20 +19,28 @@ const Blog: FC = () => {
                 const filteredArticles: IArticle[] = dataArticles.docs.map(
                     (articleDoc) => {
                         const data = articleDoc.data();
+                        const {
+                            name,
+                            description,
+                            content,
+                            createdAt,
+                            user,
+                            image,
+                        } = data;
                         return {
                             id: articleDoc.id,
-                            name: data.name,
-                            description: data.description,
-                            content: data.content,
+                            name: name,
+                            description: description,
+                            content: content,
                             createdAt: {
-                                date: data.createdAt.date,
-                                formatedDate: data.createdAt.formatedDate,
+                                date: createdAt.date,
+                                formatedDate: createdAt.formatedDate,
                             },
                             user: {
-                                username: data.user.username,
-                                avatarUrl: data.user.avatarUrl,
+                                username: user.username,
+                                avatarUrl: user.avatarUrl,
                             },
-                            image: data.image,
+                            image: image,
                         };
                     }
                 );

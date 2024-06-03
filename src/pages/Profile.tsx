@@ -20,7 +20,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { IUser } from 'types/user/user';
 
-import { removeUser } from '../redux/ProfileSlice';
+import { removeUser, setUser } from '../redux/ProfileSlice';
 
 interface IUserInfo {
     aim: IUser['aim'];
@@ -32,7 +32,8 @@ const Profile: FC = () => {
     const storage = getStorage();
     const dispatch = useAppDispatch();
 
-    const { isAuth, username, id } = useAuth();
+    const user = useAuth();
+    const { isAuth, username, id } = user;
 
     const [userInfo, setUserInfo] = useState<IUserInfo>({
         aim: '',
@@ -64,8 +65,7 @@ const Profile: FC = () => {
         };
 
         getUserInfoFromFirebase();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isEdit]);
+    }, [id, isEdit, db]);
 
     const uploadAvatarInStorage = (file: File) => {
         try {
@@ -78,7 +78,6 @@ const Profile: FC = () => {
                     setIsUploading(true);
                 },
                 (error) => {
-                    console.error('Upload failed', error);
                     setIsUploading(false);
                 },
                 async () => {
@@ -89,8 +88,6 @@ const Profile: FC = () => {
                     setIsUploading(false);
                 }
             );
-        } catch (error) {
-            console.error('Failed to upload photo', error);
         } finally {
             setIsUploading(false);
         }
@@ -129,6 +126,12 @@ const Profile: FC = () => {
                         avatarUrl,
                     });
                 }
+                dispatch(
+                    setUser({
+                        ...user,
+                        avatarUrl,
+                    })
+                );
             }
         } finally {
             setIsLoading(false);
@@ -136,6 +139,11 @@ const Profile: FC = () => {
     };
 
     const onLogOut = () => {
+        setUserInfo({
+            aboutText: '',
+            aim: '',
+        });
+        setAvatarUrl('');
         dispatch(removeUser());
     };
 

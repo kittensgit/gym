@@ -10,8 +10,5 @@ export interface IArticle {
         date: Date | Timestamp;
         formatedDate: string;
     };
-    user: {
-        username: string;
-        avatarUrl?: string;
-    };
+    user: { username: string; avatarUrl: string | null };
 }

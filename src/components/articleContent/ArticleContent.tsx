@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 
+import avaIcon from 'assets/icons/ava.png';
 import { IArticle } from 'types/articles/articles';
 
 import styles from './ArticleContent.module.css';
@@ -24,9 +25,14 @@ const ArticleContent: FC<ArticleContentProps> = ({ articleData }) => {
             </div>
             <div className={styles.author}>
                 <div className={styles.info}>
-                    {articleData.user.avatarUrl && (
-                        <img src={articleData.user.avatarUrl} alt="ava" />
-                    )}
+                    <img
+                        src={
+                            articleData.user.avatarUrl
+                                ? articleData.user.avatarUrl
+                                : avaIcon
+                        }
+                        alt="avatar"
+                    />
                     <h4>{articleData.user.username}</h4>
                 </div>
                 <p>{articleData.createdAt.formatedDate}</p>

@@ -5,7 +5,7 @@ export interface IUser {
     token: string;
     aim?: string;
     aboutText?: string;
-    avatarUrl?: string;
+    avatarUrl: string | null;
 }
 
 export interface ISet {

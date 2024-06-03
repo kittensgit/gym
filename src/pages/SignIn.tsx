@@ -36,8 +36,16 @@ const SignIn: FC = () => {
                 password
             );
 
+            console.log(user);
             const userRef = doc(db, 'users', `${user.uid}`);
             const docSnapshot = await getDoc(userRef);
+
+            const userInfo = {
+                email: user.email,
+                token: user.refreshToken,
+                id: user.uid,
+                username: user.displayName,
+            };
 
             if (docSnapshot.exists()) {
                 const userData = docSnapshot.data();
@@ -45,18 +53,14 @@ const SignIn: FC = () => {
 
                 dispatch(
                     setUser({
-                        email: user.email,
-                        token: user.refreshToken,
-                        id: user.uid,
-                        username: user.displayName,
+                        ...userInfo,
                         avatarUrl: avatarUrl,
                     })
                 );
-
-                navigate(`/profile/${user.uid}`);
             } else {
-                setErrorMessage('User data not found');
+                dispatch(setUser(userInfo));
             }
+            navigate(`/profile/${user.uid}`);
         } catch (error: any) {
             if (error instanceof Error) {
                 setErrorMessage(error.message);

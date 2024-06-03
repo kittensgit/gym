@@ -46,7 +46,6 @@ const CreateArticle: FC = () => {
                     setIsUploading(true);
                 },
                 (error) => {
-                    console.error('Upload failed', error);
                     setIsUploading(false);
                 },
                 async () => {
@@ -57,8 +56,6 @@ const CreateArticle: FC = () => {
                     setIsUploading(false);
                 }
             );
-        } catch (error) {
-            console.error('Failed to upload photo', error);
         } finally {
             setIsUploading(false);
         }
