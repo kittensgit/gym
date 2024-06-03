@@ -5,7 +5,6 @@
 .profile {
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
 .profile_content {
@@ -18,7 +17,6 @@
 .info {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
     padding: 20px;
     background-color: #1e1e1e;
 }
@@ -232,4 +230,81 @@
 
 .active {
     background-color: #272727 !important;
+}
+
+@media (max-width: 800px) {
+    .avatarContainer {
+        width: 200px;
+        height: 200px;
+    }
+    .about h1 {
+        font-size: 32px;
+    }
+    .edit img {
+        width: 40px;
+        height: 40px;
+    }
+    .text h2 {
+        font-size: 26px;
+    }
+    .text p {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 600px) {
+    .info {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .info_content {
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .about {
+        align-items: center;
+        padding: 0;
+    }
+    .avatarContainer img {
+        border: 6px solid #161515;
+    }
+    .about h1 {
+        font-size: 26px;
+    }
+    .about p {
+        font-size: 16px;
+    }
+    .text h2 {
+        font-size: 22px;
+    }
+    .text p {
+        font-size: 16px;
+    }
+    .btns {
+        flex-direction: row;
+        align-items: center;
+    }
+    .edit img {
+        width: 35px;
+        height: 35px;
+    }
+    .logout {
+        font-size: 16px;
+    }
+    .logout img {
+        width: 25px;
+        height: 25px;
+    }
+    .links a {
+        font-size: 16px;
+    }
+    .btn,
+    .input,
+    .textarea {
+        font-size: 16px;
+    }
+    .input {
+        width: 300px;
+    }
 }

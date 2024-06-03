@@ -105,9 +105,16 @@
     .article_text {
         font-size: 16px;
     }
+    .info {
+        gap: 8px;
+    }
     .info h4,
     .date {
         font-size: 16px;
+    }
+    .info img {
+        width: 40px;
+        height: 40px;
     }
     .distanceTime {
         font-size: 14px;
