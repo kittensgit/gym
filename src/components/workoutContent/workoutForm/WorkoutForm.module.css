@@ -4,7 +4,7 @@
     align-items: center;
     gap: 10px;
     font-size: 20px;
-    padding: 15px;
+    padding: 10px;
     background-color: transparent;
     color: #fff;
     border: 2px solid #605656;
@@ -132,4 +132,56 @@
     width: 40px;
     height: 40px;
     object-fit: cover;
+}
+
+@media (max-width: 800px) {
+    .btn_plus {
+        font-size: 18px;
+        gap: 5px;
+    }
+    .btn {
+        font-size: 18px;
+    }
+    .btn_plus img {
+        width: 25px;
+        height: 25px;
+    }
+    .workout_inputs {
+        flex-direction: column;
+    }
+    .exercise_form_content {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .set_wrapper {
+        padding: 0;
+    }
+    .done img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 630px) {
+    .btn_plus {
+        font-size: 16px;
+    }
+    .btn_plus img {
+        width: 20px;
+        height: 20px;
+    }
+    .btn {
+        font-size: 16px;
+    }
+    .workout_form input {
+        padding: 10px;
+        font-size: 16px;
+    }
+    .exercise_form {
+        padding: 0 10px;
+    }
+    .set_form {
+        padding: 0;
+    }
 }

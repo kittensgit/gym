@@ -253,6 +253,9 @@
 }
 
 @media (max-width: 600px) {
+    .profile_content {
+        padding: 10px;
+    }
     .info {
         flex-direction: column;
         padding: 10px;
@@ -306,5 +309,8 @@
     }
     .input {
         width: 300px;
+    }
+    .links {
+        gap: 10px;
     }
 }

@@ -7,3 +7,9 @@
 .workout_set:nth-child(even) {
     color: #b61111;
 }
+
+@media (max-width: 630px) {
+    .workout_set {
+        font-size: 16px;
+    }
+}

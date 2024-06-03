@@ -232,7 +232,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                                 Статьи
                             </Link>
                         </div>
-                        {/* <Outlet /> */}
+                        <Outlet />
                     </div>
                 </div>
             </div>

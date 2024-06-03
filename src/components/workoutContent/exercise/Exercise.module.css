@@ -14,3 +14,24 @@
     flex-direction: column;
     gap: 15px;
 }
+
+@media (max-width: 800px) {
+    .workout_exercise h4 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 630px) {
+    .workout_exercise {
+        padding: 0;
+    }
+    .workout_exercise h4 {
+        text-align: center;
+        font-size: 18px;
+    }
+    .workout_exercise {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}

@@ -120,7 +120,7 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
                                         {String(
                                             itemWorkout.dateWorkout.year
                                         ).slice(2)}
-                                    </span>
+                                    </span>{' '}
                                     — {itemWorkout.workoutName}
                                 </h3>
                                 <button
