@@ -36,7 +36,6 @@ const SignIn: FC = () => {
                 password
             );
 
-            console.log(user);
             const userRef = doc(db, 'users', `${user.uid}`);
             const docSnapshot = await getDoc(userRef);
 

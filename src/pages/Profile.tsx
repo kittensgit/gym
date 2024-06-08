@@ -1,11 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
+    collection,
     doc,
     getDoc,
+    getDocs,
     getFirestore,
+    query,
     setDoc,
     updateDoc,
+    where,
+    writeBatch,
 } from 'firebase/firestore';
 import {
     getDownloadURL,
@@ -119,6 +124,25 @@ const Profile: FC = () => {
                         aboutText,
                         avatarUrl,
                     });
+
+                    const q = query(
+                        collection(db, 'articles'),
+                        where('user.username', '==', username)
+                    );
+                    const querySnapshot = await getDocs(q);
+
+                    // Обновляем поле avatarUrl в каждой статье
+                    const batch = writeBatch(db);
+                    querySnapshot.forEach((articleDoc) => {
+                        const articleRef = doc(db, 'articles', articleDoc.id);
+                        batch.update(articleRef, {
+                            user: {
+                                username,
+                                avatarUrl,
+                            },
+                        });
+                    });
+                    await batch.commit();
                 } else {
                     await setDoc(userRef, {
                         aim,

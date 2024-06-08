@@ -63,6 +63,13 @@
         width: 25px;
         height: 25px;
     }
+    .message {
+        font-size: 22px;
+    }
+    .message img {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -75,5 +82,14 @@
     .btn_plus img {
         width: 20px;
         height: 20px;
+    }
+    .message {
+        font-size: 18px;
+        gap: 0;
+        padding: 10px 10px 0;
+    }
+    .message img {
+        width: 40px;
+        height: 40px;
     }
 }

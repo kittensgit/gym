@@ -139,6 +139,13 @@
         width: 30px;
         height: 30px;
     }
+    .message {
+        font-size: 22px;
+    }
+    .message img {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 @media (max-width: 630px) {
@@ -162,5 +169,14 @@
     .delete img {
         width: 25px;
         height: 25px;
+    }
+    .message {
+        font-size: 18px;
+        gap: 0;
+        padding: 20px 10px 0;
+    }
+    .message img {
+        width: 40px;
+        height: 40px;
     }
 }
