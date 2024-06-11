@@ -36,7 +36,7 @@ const CreateArticleContent: FC<CreateArticleContentProps> = ({
     const options = useMemo(
         () => ({
             spellChecker: false,
-            autofocus: true,
+            autofocus: false,
             minHeight: '400px',
             placeholder: 'Введите текст статьи...',
             status: false,

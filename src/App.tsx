@@ -28,6 +28,7 @@ const App: FC = () => {
                 <Suspense fallback={<Loading />}>
                     <Routes>
                         <Route path="/" element={<LazyHomePage />} />
+                        <Route path="/gym" element={<LazyHomePage />} />
                         <Route path="/blog" element={<LazyBlogPage />} />
                         <Route
                             path="/create"
