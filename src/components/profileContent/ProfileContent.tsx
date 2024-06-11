@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FC, useRef } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
+import Loading from 'components/common/loading/Loading';
+
 import avaIcon from 'assets/icons/ava.png';
 import editIcon from 'assets/icons/edit.png';
 import logoutIcon from 'assets/icons/logout.png';
@@ -83,31 +85,35 @@ const ProfileContent: FC<ProfileContentProps> = ({
                 <div className={styles.profile}>
                     <div className={styles.info}>
                         <div className={styles.info_content}>
-                            {isLoading ? (
-                                <div>Loading...</div>
-                            ) : isUploading ? (
-                                <div>Uploading...</div>
-                            ) : (
-                                <div
-                                    className={styles.avatarContainer}
-                                    onClick={handleClickInput}
-                                >
-                                    <img
-                                        className={
-                                            isEdit
-                                                ? styles.ava +
-                                                  ' ' +
-                                                  styles.ava_edit
-                                                : styles.ava
-                                        }
-                                        src={avatarUrl ? avatarUrl : avaIcon}
-                                        alt="avatar"
-                                    />
-                                    {isEdit && (
-                                        <div className={styles.plusIcon}></div>
-                                    )}
-                                </div>
-                            )}
+                            <div
+                                className={styles.avatarContainer}
+                                onClick={handleClickInput}
+                            >
+                                {isLoading || isUploading ? (
+                                    <Loading />
+                                ) : (
+                                    <>
+                                        <img
+                                            className={
+                                                isEdit
+                                                    ? styles.ava +
+                                                      ' ' +
+                                                      styles.ava_edit
+                                                    : styles.ava
+                                            }
+                                            src={
+                                                avatarUrl ? avatarUrl : avaIcon
+                                            }
+                                            alt="avatar"
+                                        />
+                                        {isEdit && (
+                                            <div
+                                                className={styles.plusIcon}
+                                            ></div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
                             <input
                                 ref={inputRef}
                                 onChange={handleChangeFile}
@@ -152,7 +158,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                                             ))}
                                     </h1>
                                     {isLoading ? (
-                                        <div>Loading...</div>
+                                        <Loading />
                                     ) : (
                                         <p>
                                             {userProfileData.aim
@@ -193,7 +199,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
                                     placeholder="Напишите о себе и о своих достижениях"
                                 ></textarea>
                             ) : isLoading ? (
-                                <div>Loading...</div>
+                                <Loading />
                             ) : (
                                 <p>
                                     {userProfileData.aboutText

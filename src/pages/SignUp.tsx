@@ -6,6 +6,7 @@ import {
     updateProfile,
 } from 'firebase/auth';
 
+import Loading from 'components/common/loading/Loading';
 import SignUpContent from 'components/signUpContent/SignUpContent';
 
 import { useAuth } from 'hooks/useAuth';
@@ -63,7 +64,7 @@ const SignUp: FC = () => {
     return (
         <div className="container">
             {loading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : isAuth ? (
                 <Navigate replace to={`/profile/${id}`} />
             ) : (

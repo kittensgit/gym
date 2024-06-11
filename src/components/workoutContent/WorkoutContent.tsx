@@ -1,5 +1,7 @@
 import { FC, useState } from 'react';
 
+import Loading from 'components/common/loading/Loading';
+
 import plusIcon from 'assets/icons/plus.png';
 import deleteIcon from 'assets/icons/trash.png';
 import emptyFile from 'assets/icons/empty.png';
@@ -98,7 +100,7 @@ const WorkoutContent: FC<WorkoutContentProps> = ({
                 />
             )}
             {isLoading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : saveError ? (
                 <p className={styles.error}>
                     Произошла ошибка при добавлении тренировки: {saveError}

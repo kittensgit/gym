@@ -8,6 +8,7 @@ import {
     uploadBytesResumable,
 } from 'firebase/storage';
 
+import Loading from 'components/common/loading/Loading';
 import CreateArticleContent from 'components/createArticleContent/CreateArticleContent';
 
 import { useAuth } from 'hooks/useAuth';
@@ -65,7 +66,7 @@ const CreateArticle: FC = () => {
         <div className="container">
             {isAuth ? (
                 isLoading ? (
-                    <div>Loading...</div>
+                    <Loading />
                 ) : (
                     <CreateArticleContent
                         username={username}

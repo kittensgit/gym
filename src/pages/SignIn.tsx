@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
+import Loading from 'components/common/loading/Loading';
 import SignInContent from 'components/signInContent/SignInContent';
 
 import { useAuth } from 'hooks/useAuth';
@@ -103,7 +104,7 @@ const SignIn: FC = () => {
     return (
         <div className="container">
             {loading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : isAuth ? (
                 <Navigate replace to={`/profile/${id}`} />
             ) : (

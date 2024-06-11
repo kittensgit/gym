@@ -7,6 +7,7 @@ import {
     where,
 } from 'firebase/firestore';
 
+import Loading from 'components/common/loading/Loading';
 import UserArticlesContent from 'components/userArticlesContent/UserArticlesContent';
 
 import { useAuth } from 'hooks/useAuth';
@@ -71,7 +72,7 @@ const UserArticles: FC = () => {
     return (
         <div>
             {isLoading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : (
                 <UserArticlesContent articles={articles} />
             )}

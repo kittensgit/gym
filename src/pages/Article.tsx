@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
+import Loading from 'components/common/loading/Loading';
 import ArticleContent from 'components/articleContent/ArticleContent';
 
 import { IArticle } from 'types/articles/articles';
@@ -52,7 +53,7 @@ const Article: FC = () => {
     return (
         <div className="container">
             {isLoading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : error ? (
                 <div className="error">{error}</div>
             ) : (
