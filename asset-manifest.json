@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/gym/static/css/main.0aa3ee1d.css",
-    "main.js": "/gym/static/js/main.9c2bd5f7.js",
+    "main.js": "/gym/static/js/main.b86cd8ba.js",
     "static/css/532.6b53dc99.chunk.css": "/gym/static/css/532.6b53dc99.chunk.css",
     "static/js/532.0b1a5118.chunk.js": "/gym/static/js/532.0b1a5118.chunk.js",
     "static/css/665.05d4c788.chunk.css": "/gym/static/css/665.05d4c788.chunk.css",
     "static/js/665.d4a50550.chunk.js": "/gym/static/js/665.d4a50550.chunk.js",
     "static/css/213.95a18015.chunk.css": "/gym/static/css/213.95a18015.chunk.css",
-    "static/js/213.883f8fe9.chunk.js": "/gym/static/js/213.883f8fe9.chunk.js",
+    "static/js/213.9e497521.chunk.js": "/gym/static/js/213.9e497521.chunk.js",
     "static/css/517.41a3d092.chunk.css": "/gym/static/css/517.41a3d092.chunk.css",
     "static/js/517.6d1315b4.chunk.js": "/gym/static/js/517.6d1315b4.chunk.js",
     "static/css/596.7f80e71a.chunk.css": "/gym/static/css/596.7f80e71a.chunk.css",
@@ -30,13 +30,13 @@
     "static/media/men.jpg": "/gym/static/media/men.635256364cbcc6fb9620.jpg",
     "index.html": "/gym/index.html",
     "main.0aa3ee1d.css.map": "/gym/static/css/main.0aa3ee1d.css.map",
-    "main.9c2bd5f7.js.map": "/gym/static/js/main.9c2bd5f7.js.map",
+    "main.b86cd8ba.js.map": "/gym/static/js/main.b86cd8ba.js.map",
     "532.6b53dc99.chunk.css.map": "/gym/static/css/532.6b53dc99.chunk.css.map",
     "532.0b1a5118.chunk.js.map": "/gym/static/js/532.0b1a5118.chunk.js.map",
     "665.05d4c788.chunk.css.map": "/gym/static/css/665.05d4c788.chunk.css.map",
     "665.d4a50550.chunk.js.map": "/gym/static/js/665.d4a50550.chunk.js.map",
     "213.95a18015.chunk.css.map": "/gym/static/css/213.95a18015.chunk.css.map",
-    "213.883f8fe9.chunk.js.map": "/gym/static/js/213.883f8fe9.chunk.js.map",
+    "213.9e497521.chunk.js.map": "/gym/static/js/213.9e497521.chunk.js.map",
     "517.41a3d092.chunk.css.map": "/gym/static/css/517.41a3d092.chunk.css.map",
     "517.6d1315b4.chunk.js.map": "/gym/static/js/517.6d1315b4.chunk.js.map",
     "596.7f80e71a.chunk.css.map": "/gym/static/css/596.7f80e71a.chunk.css.map",
@@ -55,6 +55,6 @@
   },
   "entrypoints": [
     "static/css/main.0aa3ee1d.css",
-    "static/js/main.9c2bd5f7.js"
+    "static/js/main.b86cd8ba.js"
   ]
 }
