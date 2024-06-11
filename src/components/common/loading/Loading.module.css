@@ -1,6 +1,7 @@
 .loading {
     margin: 0 auto;
     width: 50px;
+    height: 50px;
     aspect-ratio: 1;
     border-radius: 50%;
     border: 8px solid #b61111;
@@ -103,6 +104,7 @@
 @media (max-width: 500px) {
     .loading {
         width: 35px;
+        height: 35px;
         border: 5px solid #b61111;
     }
 }
