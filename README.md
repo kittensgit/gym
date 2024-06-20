@@ -11,3 +11,7 @@
 `react-markdown` - отображает текст оформленный в формате markdown
 
 `date-fns` - для форматирования дат
+
+### Deploy application
+
+[Link on website](https://kittensgit.github.io/gym/)
